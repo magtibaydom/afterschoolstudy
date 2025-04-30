@@ -7,8 +7,8 @@
   --button-bg: #007bff; /* A deeper blue for buttons */
   --button-hover-bg: #0056b3; /* Even darker for hover */
   --font-primary: 'Plus Jakarta Sans', sans-serif;
-  --light-bg-gradient-start: #f8f9fa;
-  --light-bg-gradient-end: #c7e0f5;
+  --light-bg-gradient-start: #aae2f8;
+  --light-bg-gradient-end: #f5e1c7;
   --dark-bg-gradient-start: #121212;
   --dark-bg-gradient-end: #2b373f;
   --toggle-text-light: #333333; /* Dark text for toggle in light mode */
@@ -76,7 +76,7 @@ body.dark .container {
   background-color: var(--button-bg);
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 50px;
   cursor: pointer;
   transition: background-color 0.3s ease;
   flex-grow: 1; /* Distribute space equally between buttons */
