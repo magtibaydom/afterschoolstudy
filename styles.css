@@ -1,65 +1,67 @@
-/* Global Styles */
+/* Root variables for light and dark themes */
 :root {
-  --bg-light: #f8f9fa;
-  --bg-dark: #121212;
-  --text-light: #ffffff;
-  --text-dark: #333333;
-  --accent: #00d2ff;
+  --bg: #f8f9fa; /* Light background */
+  --text: #333333; /* Dark text */
+  --accent: #00d2ff; /* Original accent blue */
+  --button-bg: #007bff; /* A deeper blue for buttons */
+  --button-hover-bg: #0056b3; /* Even darker for hover */
+  --font-primary: 'Plus Jakarta Sans', sans-serif;
+  --light-bg-gradient-start: #f8f9fa;
+  --light-bg-gradient-end: #e9ecef;
+  --toggle-text-light: #333333; /* Dark text for toggle in light mode */
 }
 
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* Dark theme variables (applied when the 'dark' class is on the body) */
+body.dark {
+  --bg: #121212; /* Dark background */
+  --text: #ffffff; /* Light text */
+  --toggle-text-light: #ffffff; /* Light text for toggle in dark mode (though accent is primary) */
 }
 
+/* Base styles */
 body {
-  font-family: 'Arial', sans-serif;
-  background-color: var(--bg-light);
-  color: var(--text-dark);
+  font-family: var(--font-primary);
+  background-color: var(--light-bg-gradient-start); /* Default light gradient start */
+  background-image: linear-gradient(to bottom, var(--light-bg-gradient-start), var(--light-bg-gradient-end)); /* Light gradient */
+  color: var(--text);
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   text-align: center;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease, background-image 0.3s ease;
 }
 
 body.dark {
-  background-color: var(--bg-dark);
-  color: var(--text-light);
+  background-color: var(--bg); /* Solid dark background */
+  background-image: none; /* Remove gradient in dark mode */
 }
 
-/* Container */
 .container {
   width: 90%;
   max-width: 600px;
   padding: 2rem;
-  background-color: var(--bg-light);
+  background-color: var(--bg);
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   text-align: center;
   transition: background-color 0.3s ease;
 }
 
-.container.dark {
-  background-color: var(--bg-dark);
+body.dark .container {
+  background-color: var(--bg); /* Ensure container also uses dark bg */
 }
 
-/* Emoji Section */
 .emoji {
   font-size: 5rem;
   margin-bottom: 1rem;
 }
 
-/* Dark Mode Toggle Button */
 .dark-toggle {
   background: transparent;
   border: 1px solid var(--accent);
   padding: 0.5rem 1rem;
-  color: var(--accent);
+  color: var(--toggle-text-light); /* Use the new variable for text color */
   font-size: 1rem;
   cursor: pointer;
   border-radius: 50px;
@@ -69,22 +71,19 @@ body.dark {
 
 .dark-toggle:hover {
   background-color: var(--accent);
-  color: var(--bg-dark);
+  color: var(--bg);
 }
 
-/* Heading */
 h1 {
   font-size: 2.5rem;
   margin-bottom: 1rem;
 }
 
-/* Paragraph */
 p {
   font-size: 1.1rem;
   margin-bottom: 1.5rem;
 }
 
-/* Notify Form */
 .notify-form {
   display: flex;
   flex-direction: column;
@@ -96,12 +95,20 @@ p {
   font-size: 1rem;
   border-radius: 8px;
   border: 1px solid #ccc;
+  color: var(--text); /* Ensure input text color changes */
+  background-color: var(--bg); /* Ensure input background color changes */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark .notify-form input {
+  color: var(--text);
+  background-color: var(--bg);
 }
 
 .notify-form button {
   padding: 0.75rem;
   font-size: 1rem;
-  background-color: var(--accent);
+  background-color: var(--button-bg); /* Using the deeper blue */
   color: white;
   border: none;
   border-radius: 8px;
@@ -110,10 +117,9 @@ p {
 }
 
 .notify-form button:hover {
-  background-color: #009ecf;
+  background-color: var(--button-hover-bg); /* Darker hover effect */
 }
 
-/* Email Contact Button */
 .email-contact {
   margin-top: 1.5rem;
 }
@@ -126,13 +132,12 @@ p {
 .email-btn {
   display: inline-block;
   text-decoration: none;
-  background: linear-gradient(135deg, #007bff, #00d2ff);
+  background: linear-gradient(135deg, #007bff, #00d2ff); /* Keeping the gradient */
   color: #fff;
   font-size: 1.1rem;
   padding: 1rem 2rem;
   border-radius: 50px;
   transition: background 0.3s ease, transform 0.2s ease;
-  cursor: pointer;
 }
 
 .email-btn:hover {
@@ -144,7 +149,6 @@ p {
   outline: none;
 }
 
-/* Footer */
 .footer {
   margin-top: 2rem;
   font-size: 1rem;

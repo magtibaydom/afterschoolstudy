@@ -1,27 +1,36 @@
-document.addEventListener("DOMContentLoaded", () => {
-    // Check for system preference and apply dark mode if preferred
-    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const toggleButton = document.getElementById("darkModeToggle");
-  
-    // Function to toggle dark mode
-    const toggleDarkMode = () => {
-      // Toggle the dark class on the <html> element (document.documentElement)
-      document.documentElement.classList.toggle("dark");
-      // Save the dark mode preference to localStorage
-      localStorage.setItem("darkMode", document.documentElement.classList.contains("dark"));
+(() => {
+    console.log("Dark mode script is running.");
+
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const body = document.body;
+    const LOCAL_STORAGE_KEY = 'darkModeEnabled';
+
+    // Function to set the dark mode preference in local storage and update the body class
+    const setDarkMode = (isEnabled) => {
+        localStorage.setItem(LOCAL_STORAGE_KEY, isEnabled);
+        body.classList.toggle('dark', isEnabled);
+        updateToggleButtonText(isEnabled);
+        console.log(`Dark mode ${isEnabled ? 'enabled' : 'disabled'}.`);
     };
-  
-    // Load dark mode preference from localStorage or system preference
-    const savedDarkMode = localStorage.getItem("darkMode");
-    if (savedDarkMode === "true" || (savedDarkMode === null && prefersDarkScheme)) {
-      document.documentElement.classList.add("dark");
-    }
-  
-    // Add event listener to toggle button
-    if (toggleButton) {
-      toggleButton.addEventListener("click", toggleDarkMode);
+
+    // Function to update the toggle button text
+    const updateToggleButtonText = (isDarkMode) => {
+        if (darkModeToggle) {
+            darkModeToggle.textContent = isDarkMode ? '☀️ Light Mode' : '🌓 Dark Mode';
+        }
+    };
+
+    // Check local storage on page load
+    const storedPreference = localStorage.getItem(LOCAL_STORAGE_KEY);
+    const initialDarkMode = storedPreference === 'true';
+    setDarkMode(initialDarkMode); // Apply initial state
+
+    // Add event listener to the toggle button
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', () => {
+            setDarkMode(!body.classList.contains('dark')); // Toggle the state
+        });
     } else {
-      console.warn("Dark mode toggle button not found!");
+        console.warn("Dark mode toggle button not found!");
     }
-  });
-  
+})();
