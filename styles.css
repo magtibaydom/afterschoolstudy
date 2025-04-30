@@ -19,7 +19,7 @@
   --light-bg-gradient-end: #f5e1c7;
   --dark-bg-gradient-start: #121212;
   --dark-bg-gradient-end: #6393a7;
-  --toggle-text-light: #333333; /* Dark text for toggle in light mode */
+  --toggle-text-light: #ffffff; /* Dark text for toggle in light mode */
 }
 
 /* Dark theme variables (applied when the 'dark' class is on the body) */
