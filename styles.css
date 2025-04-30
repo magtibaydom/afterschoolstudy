@@ -1,4 +1,12 @@
 /* Root variables for light and dark themes */
+/* Load CRU-pokawin-Alize font */
+@font-face {
+  font-family: 'PokawinAlize';
+  src: url('fonts/CruPokawinAlizePencil-Dp91.ttf') format('truetype');
+  font-weight: lighter;
+  font-style: normal;
+}
+
 :root {
   --bg: #f8f9fa; /* Light background */
   --text: #333333; /* Dark text */
@@ -124,7 +132,7 @@ body.dark .notify-form input {
   font-size: 1rem;
   cursor: pointer;
   border-radius: 50px;
-  margin-bottom: 1rem;
+  margin-bottom: 0.3rem;
   transition: all 0.3s ease;
 }
 
@@ -134,9 +142,10 @@ body.dark .notify-form input {
 }
 
 h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
 }
+
 
 p {
   font-size: 1.1rem;
@@ -155,7 +164,7 @@ p {
 .email-btn {
   display: inline-block;
   text-decoration: none;
-  background: linear-gradient(135deg, #007bff, #00d2ff);
+  background: linear-gradient(135deg, #007bff, #efb05d);
   color: #fff;
   font-size: 1.1rem;
   padding: 1rem 2rem;
@@ -164,7 +173,7 @@ p {
 }
 
 .email-btn:hover {
-  background: linear-gradient(135deg, #00d2ff, #007bff);
+  background: linear-gradient(135deg, #efb05d, #007bff);
   transform: scale(1.05);
 }
 
