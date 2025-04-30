@@ -60,17 +60,17 @@ body.dark .container {
 .notify-form {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 0.3rem;
 }
 
 .signup-buttons {
   display: flex;
-  gap: 0.8rem;
+  gap: 2rem;
   margin-top: 0.8rem; /* Add some space between input and buttons */
 }
 
 .notify-btn {
-  padding: 0.75rem 1.5rem;
+  padding: 0.8rem 0.3rem;
   font-size: 1rem;
   background-color: var(--button-bg);
   color: white;
