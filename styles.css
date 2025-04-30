@@ -19,7 +19,7 @@
   --light-bg-gradient-end: #f5e1c7;
   --dark-bg-gradient-start: #121212;
   --dark-bg-gradient-end: #6393a7;
-  --toggle-text-light: #ffffff; /* Dark text for toggle in light mode */
+  --toggle-text-light: #333333; /* Dark text for toggle in light mode */
 }
 
 /* Dark theme variables (applied when the 'dark' class is on the body) */
@@ -116,6 +116,7 @@ body.dark .notify-form textarea {
   background-color: #efb05d; /* Orange color for Learners */
   color: white; /* Text color remains white */
   transition: background-color 0.3s ease;
+  font-family: var(--font-primary); /* Use the same font as the body */
 }
 
 /* 'For Learners' button hover style */
@@ -133,6 +134,7 @@ body.dark .notify-form textarea {
   background-color: #007bff; /* Blue color for Mentors */
   color: white; /* Text color remains white */
   transition: background-color 0.3s ease;
+  font-family: var(--font-primary); /* Use the same font as the body */
 }
 
 /* 'For Mentors' button hover style */
