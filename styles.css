@@ -2,7 +2,7 @@
 :root {
   --bg: #f8f9fa; /* Light background */
   --text: #333333; /* Dark text */
-  --accent: #00d2ff; /* Original accent blue */
+  --accent: #006aff; /* Original accent blue */
   --button-bg: #007bff; /* A deeper blue for buttons */
   --button-hover-bg: #0056b3; /* Even darker for hover */
   --font-primary: 'Plus Jakarta Sans', sans-serif;
