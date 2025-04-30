@@ -24,6 +24,7 @@ body {
   align-items: center;
   min-height: 100vh;
   text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 body.dark {
@@ -40,6 +41,7 @@ body.dark {
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   text-align: center;
+  transition: background-color 0.3s ease;
 }
 
 .container.dark {
@@ -121,16 +123,15 @@ p {
   margin-bottom: 0.5rem;
 }
 
-/* Style anchor <a> tag and button inside it */
 .email-btn {
-  display: inline-block;               /* allow padding/margins */
-  text-decoration: none;               /* remove underline */
+  display: inline-block;
+  text-decoration: none;
   background: linear-gradient(135deg, #007bff, #00d2ff);
   color: #fff;
   font-size: 1.1rem;
   padding: 1rem 2rem;
   border-radius: 50px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: background 0.3s ease, transform 0.2s ease;
   cursor: pointer;
 }
 
