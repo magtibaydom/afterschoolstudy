@@ -1,141 +1,19 @@
-:root {
-  --bg-light: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-  --bg-dark: #1e1e2f;
-  --text-dark: #333;
-  --text-light: #f0f0f0;
-  --accent: #007bff;
-  --container-bg-light: white;
-  --container-bg-dark: #2a2a3b;
-}
-
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: var(--bg-light);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  text-align: center;
-  color: var(--text-dark);
-  margin: 0;
-  padding: 0;
-}
-
-.container {
-  padding: 2rem;
-  background-color: var(--container-bg-light);
-  border-radius: 1rem;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-  max-width: 500px;
-  width: 90%;
-}
-
-h1 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-}
-
-p {
-  font-size: 1.1rem;
-  margin-bottom: 1.5rem;
-}
-
-.emoji {
-  font-size: 3rem;
-  margin-bottom: 0.5rem;
-}
-
-.footer {
-  font-size: 0.9rem;
-  margin-top: 2rem;
-}
-
-.socials {
+.email-contact {
   margin-top: 1.5rem;
 }
 
-.socials a {
-  margin: 0 0.5rem;
-  font-size: 1.5rem;
+.email-contact p {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.email-contact a {
   color: var(--accent);
-  transition: transform 0.2s ease;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
-.socials a:hover {
-  transform: scale(1.2);
-}
-
-.notify-form {
-  display: flex;
-  gap: 0.5rem;
-  justify-content: center;
-  margin-top: 1rem;
-  flex-wrap: wrap;
-}
-
-.notify-form input {
-  padding: 0.5rem 1rem;
-  border: 1px solid #ccc;
-  border-radius: 999px;
-  font-size: 1rem;
-  flex: 1 1 200px;
-}
-
-.notify-form button {
-  padding: 0.5rem 1.2rem;
-  border: none;
-  border-radius: 999px;
-  background-color: var(--accent);
-  color: white;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.notify-form button:hover {
-  background-color: #0056b3;
-}
-
-/* Dark Mode Overrides */
-.dark body {
-  background: var(--bg-dark);
-  color: var(--text-light);
-}
-
-.dark .container {
-  background-color: var(--container-bg-dark);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-}
-
-.dark .footer,
-.dark a {
-  color: var(--text-light);
-}
-
-.dark input,
-.dark button {
-  background-color: #333;
-  color: white;
-  border-color: #444;
-}
-
-.dark input::placeholder {
-  color: #aaa;
-}
-
-/* Toggle Button */
-.dark-toggle {
-  background: none;
-  border: 1px solid #ccc;
-  border-radius: 999px;
-  padding: 0.4rem 1rem;
-  font-size: 0.9rem;
-  cursor: pointer;
-  margin-bottom: 1rem;
-  transition: all 0.2s ease;
-}
-
-.dark .dark-toggle {
-  border-color: #666;
-  color: white;
+.email-contact a:hover {
+  color: #0056b3;
 }
