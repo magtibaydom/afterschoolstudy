@@ -1,16 +1,19 @@
-const toggle = document.getElementById("darkModeToggle");
+// Check for system preference and apply dark mode if preferred
+const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
+const toggleButton = document.getElementById("darkModeToggle");
 
-// Step 1: Check localStorage, then system preference
-const storedTheme = localStorage.getItem("theme");
+// Function to toggle dark mode
+const toggleDarkMode = () => {
+  // Toggle the dark class on the <html> element (document.documentElement)
+  document.documentElement.classList.toggle("dark");
+  // Save the dark mode preference to localStorage
+  localStorage.setItem("darkMode", document.documentElement.classList.contains("dark"));
+};
 
-if (storedTheme === "dark" || 
-   (!storedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+// Load dark mode preference from localStorage
+if (localStorage.getItem("darkMode") === "true" || (prefersDarkScheme && localStorage.getItem("darkMode") === null)) {
   document.documentElement.classList.add("dark");
 }
 
-// Step 2: Add toggle click handler
-toggle.addEventListener("click", () => {
-  document.documentElement.classList.toggle("dark");
-  const isDark = document.documentElement.classList.contains("dark");
-  localStorage.setItem("theme", isDark ? "dark" : "light");
-});
+// Add event listener to toggle button
+toggleButton.addEventListener("click", toggleDarkMode);

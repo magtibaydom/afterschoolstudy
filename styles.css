@@ -1,145 +1,117 @@
+/* Global Styles */
 :root {
-  --bg-light: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-  --bg-dark: #1e1e2f;
-  --text-dark: #333;
-  --text-light: #f0f0f0;
-  --accent: #007bff;
-  --container-bg-light: white;
-  --container-bg-dark: #2a2a3b;
+  --bg-light: #f8f9fa;
+  --bg-dark: #121212;
+  --text-light: #ffffff;
+  --text-dark: #333333;
+  --accent: #00d2ff;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: var(--bg-light);
+  font-family: 'Arial', sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-dark);
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   text-align: center;
-  color: var(--text-dark);
-  margin: 0;
-  padding: 0;
 }
 
+body.dark {
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+}
+
+/* Container */
 .container {
-  padding: 2rem;
-  background-color: var(--container-bg-light);
-  border-radius: 1rem;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-  max-width: 500px;
   width: 90%;
+  max-width: 600px;
+  padding: 2rem;
+  background-color: var(--bg-light);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
-h1 {
-  font-size: 2rem;
+.container.dark {
+  background-color: var(--bg-dark);
+}
+
+/* Emoji Section */
+.emoji {
+  font-size: 5rem;
   margin-bottom: 1rem;
 }
 
+/* Dark Mode Toggle Button */
+.dark-toggle {
+  background: transparent;
+  border: 1px solid var(--accent);
+  padding: 0.5rem 1rem;
+  color: var(--accent);
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 50px;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.dark-toggle:hover {
+  background-color: var(--accent);
+  color: var(--bg-dark);
+}
+
+/* Heading */
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Paragraph */
 p {
   font-size: 1.1rem;
   margin-bottom: 1.5rem;
 }
 
-.emoji {
-  font-size: 3rem;
-  margin-bottom: 0.5rem;
-}
-
-.footer {
-  font-size: 0.9rem;
-  margin-top: 2rem;
-}
-
-.socials {
-  margin-top: 1.5rem;
-}
-
-.socials a {
-  margin: 0 0.5rem;
-  font-size: 1.5rem;
-  color: var(--accent);
-  transition: transform 0.2s ease;
-}
-
-.socials a:hover {
-  transform: scale(1.2);
-}
-
+/* Notify Form */
 .notify-form {
   display: flex;
-  gap: 0.5rem;
-  justify-content: center;
-  margin-top: 1rem;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 0.8rem;
 }
 
 .notify-form input {
-  padding: 0.5rem 1rem;
-  border: 1px solid #ccc;
-  border-radius: 999px;
+  padding: 0.75rem;
   font-size: 1rem;
-  flex: 1 1 200px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
 }
 
 .notify-form button {
-  padding: 0.5rem 1.2rem;
-  border: none;
-  border-radius: 999px;
+  padding: 0.75rem;
+  font-size: 1rem;
   background-color: var(--accent);
   color: white;
-  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.3s ease;
 }
 
 .notify-form button:hover {
-  background-color: #0056b3;
+  background-color: #009ecf;
 }
 
-/* Dark Mode Overrides */
-.dark body {
-  background: var(--bg-dark);
-  color: var(--text-light);
-}
-
-.dark .container {
-  background-color: var(--container-bg-dark);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-}
-
-.dark .footer,
-.dark a {
-  color: var(--text-light);
-}
-
-.dark input,
-.dark button {
-  background-color: #333;
-  color: white;
-  border-color: #444;
-}
-
-.dark input::placeholder {
-  color: #aaa;
-}
-
-/* Toggle Button */
-.dark-toggle {
-  background: none;
-  border: 1px solid #ccc;
-  border-radius: 999px;
-  padding: 0.4rem 1rem;
-  font-size: 0.9rem;
-  cursor: pointer;
-  margin-bottom: 1rem;
-  transition: all 0.2s ease;
-}
-
-.dark .dark-toggle {
-  border-color: #666;
-  color: white;
-}
-
+/* Email Contact Button */
 .email-contact {
   margin-top: 1.5rem;
 }
@@ -149,13 +121,31 @@ p {
   margin-bottom: 0.5rem;
 }
 
-.email-contact a {
-  color: var(--accent);
+/* Style anchor <a> tag and button inside it */
+.email-btn {
+  display: inline-block;               /* allow padding/margins */
+  text-decoration: none;               /* remove underline */
+  background: linear-gradient(135deg, #007bff, #00d2ff);
+  color: #fff;
   font-size: 1.1rem;
-  text-decoration: none;
-  transition: color 0.3s ease;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
 }
 
-.email-contact a:hover {
-  color: #0056b3;
+.email-btn:hover {
+  background: linear-gradient(135deg, #00d2ff, #007bff);
+  transform: scale(1.05);
+}
+
+.email-btn:focus {
+  outline: none;
+}
+
+/* Footer */
+.footer {
+  margin-top: 2rem;
+  font-size: 1rem;
+  color: var(--accent);
 }
