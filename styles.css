@@ -176,3 +176,21 @@ p {
   font-size: 1rem;
   color: var(--accent);
 }
+
+/* Thank You Popup */
+.thank-you-popup {
+  background-color: #e9ecef; /* Light background */
+  color: #28a745; /* Success green */
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  display: none; /* Initially hidden */
+  text-align: center;
+  border: 1px solid #d1e7dd;
+}
+
+body.dark .thank-you-popup {
+  background-color: #283b41; /* Darker background for dark mode */
+  color: #a7f0ba; /* Lighter green for dark mode */
+  border: 1px solid #1e362b;
+}

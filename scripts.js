@@ -29,10 +29,12 @@
         const clickedButton = event.submitter;
         const role = clickedButton.dataset.role;
         const emailInput = notifyForm.querySelector('input[type="email"]');
+        const thankYouMessage = document.getElementById('thankYouMessage'); // Get the thank you message element
 
         if (emailInput.value && role) {
             clickedButton.textContent = 'Submitting...';
             clickedButton.disabled = true;
+            thankYouMessage.style.display = 'none'; // Ensure it's hidden before a new submission
 
             fetch(backendUrl, {
                 method: 'POST',
@@ -47,13 +49,14 @@
                 clickedButton.textContent = `Notify Me for ${role.charAt(0).toUpperCase() + role.slice(1)}`;
                 clickedButton.disabled = false;
                 emailInput.value = ''; // Clear the input field
-                alert(`Thank you for signing up to be notified for ${role}!`);
+                thankYouMessage.style.display = 'block'; // Show the thank you message
             })
             .catch(error => {
                 console.error('Submission error:', error);
                 clickedButton.textContent = `Notify Me for ${role.charAt(0).toUpperCase() + role.slice(1)}`;
                 clickedButton.disabled = false;
-                alert('Oops! Something went wrong. Please try again.');
+                thankYouMessage.textContent = 'Oops! Something went wrong. Please try again.'; // Update message for error
+                thankYouMessage.style.display = 'block'; // Show the error message
             });
         } else {
             alert('Please enter your email address.');
