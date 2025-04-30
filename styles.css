@@ -2,7 +2,8 @@
 :root {
   --bg: #f8f9fa; /* Light background */
   --text: #333333; /* Dark text */
-  --accent: #006aff; /* Original accent blue */
+  --accent: #0056b3; /* Original accent blue */
+  --dark-accent:  #00bfff; /* Dark mode accent blue */
   --button-bg: #007bff; /* A deeper blue for buttons */
   --button-hover-bg: #0056b3; /* Even darker for hover */
   --font-primary: 'Plus Jakarta Sans', sans-serif;
@@ -175,6 +176,10 @@ p {
   margin-top: 2rem;
   font-size: 1rem;
   color: var(--accent);
+}
+
+body.dark .footer {
+  color: var(--dark-accent);
 }
 
 /* Thank You Popup */
