@@ -22,11 +22,14 @@
         <button id="darkModeToggle" class="dark-toggle">🌓 Dark Mode</button>
         <h1>After School Study Club</h1>
         <p>We’re cooking up something awesome. The site is still under construction!</p>
-        <p>Check back soon for updates or sign up below:</p>
+        <p>Sign up to be notified:</p>
 
         <form class="notify-form">
             <input type="email" placeholder="you@example.com" required />
-            <button type="submit">Notify Me</button>
+            <div class="signup-buttons">
+                <button type="submit" class="notify-btn mentor-btn" data-role="mentoring">Notify Me for Mentoring</button>
+                <button type="submit" class="notify-btn mentee-btn" data-role="mentorship">Notify Me for Mentorship</button>
+            </div>
         </form>
 
         <div class="email-contact">
