@@ -194,3 +194,7 @@ body.dark .thank-you-popup {
   color: #a7f0ba; /* Lighter green for dark mode */
   border: 1px solid #1e362b;
 }
+
+.spacing-below {
+  margin-bottom: 1rem; /* Or any amount of space you prefer */
+}

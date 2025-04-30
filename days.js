@@ -3,9 +3,9 @@
 
     const darkModeToggle = document.getElementById('darkModeToggleSubdomain');
     const body = document.body;
-    const daysSinceDisplay = document.getElementById('daysSince');
+    const dayCounterDisplay = document.getElementById('dayCounter');
     const LOCAL_STORAGE_KEY = 'darkModeEnabledSubdomain'; // Use a different key for the subdomain
-    const launchDate = new Date(2025, 4, 1); // Month is 0-indexed (May is 4)
+    const startDate = new Date(2025, 4, 1); // Month is 0-indexed (May is 4)
 
     // Function to set the dark mode preference in local storage and update the body class
     const setDarkMode = (isEnabled) => {
@@ -22,12 +22,13 @@
         }
     };
 
-    // Function to calculate and display days since the launch date
-    const displayDaysSince = () => {
+    // Function to calculate and display the day number
+    const displayDayNumber = () => {
         const today = new Date();
-        const timeDifference = today.getTime() - launchDate.getTime();
+        const timeDifference = today.getTime() - startDate.getTime();
         const daysDifference = Math.ceil(timeDifference / (1000 * 3600 * 24));
-        daysSinceDisplay.textContent = `${daysDifference} Days Since Launch`;
+        dayCounterDisplay.textContent = `Day ${daysDifference}`;
+        document.title = `Day ${daysDifference} | After School Study Club`; // Update the title
     };
 
     // Check local storage on page load
@@ -44,8 +45,8 @@
         console.warn("Dark mode toggle button not found!");
     }
 
-    // Display the days since launch
-    displayDaysSince();
+    // Display the day number
+    displayDayNumber();
 
     // Initial update of the button text
     updateToggleButtonText(initialDarkMode);
