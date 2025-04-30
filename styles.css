@@ -208,3 +208,28 @@ body.dark .thank-you-popup {
   color: #a7f0ba; /* Lighter green for dark mode */
   border: 1px solid #1e362b;
 }
+
+/* ... other styles ... */
+
+.copy-confirmation {
+  position: fixed;
+  left: 50%;
+  bottom: 20px; /* Adjust as needed */
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  z-index: 1000;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; /* Added transform to transition */
+  transform: translateY(20px) translateX(-50%); /* Start a bit below */
+}
+
+.copy-confirmation.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) translateX(-50%); /* Slide up to its final position */
+}
