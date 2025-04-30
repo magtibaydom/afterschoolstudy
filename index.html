@@ -8,28 +8,37 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-        integrity="sha512-MCw98SFnGE8fJT3GXwE9dHI7RxUu3e5Y+GcQ9r1lp2oYzWZP5YzOq63GJ2bkS1x+PiKcKNSZK6Gp5H0j4H9FQ=="
-        crossorigin="anonymous"
-        referrerpolicy="no-referrer"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 </head>
 <body>
     <div class="container">
-        <div class="emoji">🚧</div>
+        <a href="https://days.afterschoolstudyclub.com" target="_blank" style="text-decoration: none; color: inherit;">
+            <div class="emoji">🚧</div>
+        </a>
         <button id="darkModeToggle" class="dark-toggle">🌓 Dark Mode</button>
         <h1 id="pagename">After School Study Club</h1>
         <p>We’re cooking up something awesome.</p>
-        <p>Sign up to be notified:</p>
 
-        <form class="notify-form">
-            <input type="email" placeholder="you@example.com" required />
-            <div class="signup-buttons">
-                <button type="submit" class="notify-btn mentor-btn" data-role="mentoring">Mentoring</button>
-                <button type="submit" class="notify-btn mentee-btn" data-role="mentorship">Mentorship</button>
+        <div class="role-selection">
+            <div class="role-box">
+                <button type="button" class="notify-btn for-mentors" data-role="mentoring">For Mentors</button>
             </div>
+            <div class="role-box">
+                <button type="button" class="notify-btn for-learners" data-role="mentorship">For Learners</button>
+            </div>
+        </div>
+
+        <form class="notify-form" style="display: none;">
+            <div id="mentorQuestionContainer" style="display: none;">
+                <label for="mentorInterest">What would you like to teach?</label>
+                <textarea id="mentorInterest" placeholder="I'd like to teach..." required></textarea>
+            </div>
+            <div id="learnerQuestionContainer" style="display: none;">
+                <label for="learnerInterest">What would you like to learn?</label>
+                <textarea id="learnerInterest" placeholder="I'd like to learn..." required></textarea>
+            </div>
+            <input type="email" placeholder="you@example.com" required />
+            <button type="submit" class="notify-btn final-signup-btn">Sign Up</button>
         </form>
 
         <div id="thankYouMessage" class="thank-you-popup">

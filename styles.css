@@ -69,9 +69,126 @@ body.dark .container {
 .notify-form {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  align-items: center;
+  gap: 0.8rem; /* Increased gap for better spacing */
+  width: 100%;
 }
 
+.notify-form label {
+  text-align: center;
+  display: block;
+  font-size: 1.1rem;
+  width: 100%;
+  margin-bottom: 0.3rem;
+}
+
+.notify-form textarea {
+  padding: 0.75rem;
+  font-family: var(--font-primary); /* Use the same font as the body */
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  color: var(--text);
+  background-color: var(--bg);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  width: 80%; /* Match email input width */
+  max-width: 80%; /* Match email input max-width */
+  min-height: 70px; /* Slightly increased minimum height */
+  resize: vertical; /* Allow vertical resizing */
+  text-align: center; /* Center initial placeholder text */
+  margin-bottom: 0.8rem; /* Add some space below the textarea */
+}
+
+body.dark .notify-form textarea {
+  color: var(--text);
+  background-color: var(--dark-bg-gradient-start);
+  border-color: #555;
+}
+
+.notify-form input#mentorInterest, /* Target interest inputs directly */
+.notify-form input#learnerInterest {
+  width: 80%;
+  max-width: 300px;
+}
+
+/* Default 'For Learners' button style */
+.notify-btn.for-learners {
+  background-color: #efb05d; /* Orange color for Learners */
+  color: white; /* Text color remains white */
+  transition: background-color 0.3s ease;
+}
+
+/* 'For Learners' button hover style */
+.notify-btn.for-learners:hover {
+  background-color: #d79a4b; /* Darkened shade of #efb05d when hovered */
+}
+
+/* 'For Learners' button when selected */
+.notify-btn.for-learners.selected {
+  background-color: #845820; /* Darkened shade of #efb05d when selected */
+}
+
+/* Default 'For Mentors' button style */
+.notify-btn.for-mentors {
+  background-color: #007bff; /* Blue color for Mentors */
+  color: white; /* Text color remains white */
+  transition: background-color 0.3s ease;
+}
+
+/* 'For Mentors' button hover style */
+.notify-btn.for-mentors:hover {
+  background-color: #0056b3; /* Darkened shade of #007bff when hovered */
+}
+
+/* 'For Mentors' button when selected */
+.notify-btn.for-mentors.selected {
+  background-color: #033f7f; /* Darkened shade of #007bff when selected */
+}
+
+
+input[type="email"] {
+  width: 80%;
+  max-width: 80%;
+  font-family: var(--font-primary); /* Use the same font as the body */
+}
+
+.notify-form input#email {
+  padding: 0.75rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  color: var(--text);
+  background-color: var(--bg);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  width: 100%;
+  max-width: 100%;
+  text-align: center;
+}
+
+body.dark .notify-form input#email {
+  color: var(--text);
+  background-color: var(--dark-bg-gradient-start);
+  border-color: #555;
+}
+
+.notify-form .final-signup-btn {
+  padding: 0.8rem 2rem;
+  font-size: 1.1rem;
+  background-color: var(--button-bg);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem; /* Increased margin to add more space */
+
+}
+
+.notify-form .final-signup-btn:hover {
+  background-color: var(--button-hover-bg);
+}
+
+/* Role selection button and layout */
 .signup-buttons {
   display: flex;
   gap: 2rem;
@@ -110,18 +227,23 @@ body.dark .notify-form input {
   border-color: #555; /* Slightly lighter border for input in dark mode */
 }
 
-.mentor-btn {
-  /* You can add specific styling for the mentor button if needed */
-}
-
-.mentee-btn {
-  /* You can add specific styling for the mentee button if needed */
-}
-
-/* Rest of your CSS remains the same */
 .emoji {
   font-size: 5rem;
   margin-bottom: 1rem;
+  transition: transform 0.1s ease-in-out; /* Optional: smooths the return */
+}
+
+.emoji:hover {
+  animation: shake 0.5s infinite alternate;
+  cursor: pointer; /* Indicate it's interactive */
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px) rotate(-2deg); }
+  50% { transform: translateX(5px) rotate(2deg); }
+  75% { transform: translateX(-5px) rotate(-2deg); }
+  100% { transform: translateX(0); }
 }
 
 .dark-toggle {
@@ -146,10 +268,9 @@ h1 {
   margin-bottom: 0.5rem;
 }
 
-
 p {
   font-size: 1.1rem;
-  margin-bottom: 0.5rem; /* Adjusted margin */
+  margin-bottom: 2rem; /* Adjusted margin */
 }
 
 .email-contact {
@@ -232,4 +353,27 @@ body.dark .thank-you-popup {
   opacity: 1;
   visibility: visible;
   transform: translateY(0) translateX(-50%); /* Slide up to its final position */
+}
+
+/* Role selection buttons */
+.role-selection {
+  display: flex;
+  justify-content: center; /* Center the boxes horizontally */
+  gap: 2rem; /* Adjust the spacing between the boxes */
+  margin-bottom: 1.5rem; /* Add some space below the buttons */
+}
+
+.role-box {
+  /* You can add styling for the boxes here if you want */
+  /* For example: */
+  /* border: 1px solid #ccc; */
+  /* border-radius: 8px; */
+  /* padding: 1rem; */
+  text-align: center; /* Center the button text within the box */
+}
+
+.role-box button {
+  padding: 1rem 2rem; /* Adjust padding for a larger button within the box */
+  font-size: 1.1rem;
+  /* Other button styles */
 }

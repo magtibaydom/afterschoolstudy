@@ -2,151 +2,79 @@
     console.log("Dark mode script is running.");
 
     const darkModeToggle = document.getElementById('darkModeToggle');
-    const body = document.body;
-    const LOCAL_STORAGE_KEY = 'darkModeEnabled';
-    const notifyForm = document.querySelector('.notify-form');
-    const backendUrl = "https://script.google.com/macros/s/AKfycbzSUC89JJADN5tQLNUI1IzsuT4WkoIk28UvnTpRHHuEfjZngATDq2RuNpW1heI0XL5Q/exec"; // Replace with your web app URL
-    const emailButton = document.querySelector('.email-btn');
-    const emailAddress = "hello@afterschoolstudyclub.com";
-    const copyConfirmation = document.createElement('div');
+    const roleButtons = document.querySelectorAll('.notify-btn');
+    const form = document.querySelector('.notify-form');
+    const mentorQuestionContainer = document.getElementById('mentorQuestionContainer');
+    const learnerQuestionContainer = document.getElementById('learnerQuestionContainer');
+    const thankYouMessage = document.getElementById('thankYouMessage');
+    const thankYouPopup = document.querySelector('.thank-you-popup');
+    const finalSubmitButton = document.querySelector('.final-signup-btn');
 
-    copyConfirmation.classList.add('copy-confirmation'); // Add the base class
-    document.body.appendChild(copyConfirmation);
+    // Dark mode toggle logic
+    darkModeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark');
+        const isDark = document.body.classList.contains('dark');
+        darkModeToggle.innerText = isDark ? '🌙 Light Mode' : '🌓 Dark Mode';
+    });
 
-    // Function to set the dark mode preference in local storage and update the body class
-    const setDarkMode = (isEnabled) => {
-        localStorage.setItem(LOCAL_STORAGE_KEY, isEnabled);
-        body.classList.toggle('dark', isEnabled);
-        updateToggleButtonText(isEnabled);
-        console.log(`Dark mode ${isEnabled ? 'enabled' : 'disabled'}.`);
-    };
-
-    // Function to update the toggle button text
-    const updateToggleButtonText = (isDarkMode) => {
-        if (darkModeToggle) {
-            darkModeToggle.textContent = isDarkMode ? '☀️ Light Mode' : '🌓 Dark Mode';
-        }
-    };
-
-    // Function to handle form submission
-    const handleFormSubmit = (event) => {
-        event.preventDefault(); // Prevent default form submission (page reload)
-
-        const clickedButton = event.submitter;
-        const role = clickedButton.dataset.role;
-        const emailInput = notifyForm.querySelector('input[type="email"]');
-        const thankYouMessage = document.getElementById('thankYouMessage'); // Get the thank you message element
-
-        if (emailInput.value && role) {
-            clickedButton.textContent = 'Submitting...';
-            clickedButton.disabled = true;
-            thankYouMessage.style.display = 'none'; // Ensure it's hidden before a new submission
-
-            fetch(backendUrl, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: `email=${encodeURIComponent(emailInput.value)}&role=${encodeURIComponent(role)}`
-            })
-            .then(response => {
-                console.log('Submission successful:', response);
-                clickedButton.textContent = `${role.charAt(0).toUpperCase() + role.slice(1)}`;
-                clickedButton.disabled = false;
-                emailInput.value = ''; // Clear the input field
-                thankYouMessage.style.display = 'block'; // Show the thank you message
-            })
-            .catch(error => {
-                console.error('Submission error:', error);
-                clickedButton.textContent = `${role.charAt(0).toUpperCase() + role.slice(1)}`;
-                clickedButton.disabled = false;
-                thankYouMessage.textContent = 'Oops! Something went wrong. Please try again.'; // Update message for error
-                thankYouMessage.style.display = 'block'; // Show the error message
-            });
-        } else {
-            alert('Please enter your email address.');
-        }
-    };
-
-    // Function to copy text to clipboard and show confirmation with slide
-    const copyToClipboard = (text) => {
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(text)
-            .then(() => {
-                copyConfirmation.textContent = `Email address "${text}" copied!`;
-                copyConfirmation.classList.add('show');
-                setTimeout(() => {
-                    copyConfirmation.classList.remove('show');
-                }, 2000); // Adjust timeout to match CSS transition duration
-            })
-            .catch(err => {
-                console.error('Failed to copy text: ', err);
-                copyConfirmation.textContent = 'Failed to copy email address. Please try again.';
-                copyConfirmation.classList.add('show');
-                setTimeout(() => {
-                    copyConfirmation.classList.remove('show');
-                }, 2500); // Adjust timeout for error message
-            });
-        } else {
-            // Fallback for older browsers
-            const textArea = document.createElement("textarea");
-            textArea.value = text;
-            textArea.style.position = "fixed";
-            textArea.style.opacity = 0;
-            document.body.appendChild(textArea);
-            textArea.focus();
-            textArea.select();
-            try {
-                const successful = document.execCommand('copy');
-                copyConfirmation.textContent = `Email address "${text}" copied!`;
-                copyConfirmation.classList.add('show');
-                setTimeout(() => {
-                    copyConfirmation.classList.remove('show');
-                }, 2000); // Adjust timeout
-            } catch (err) {
-                console.error('Unable to copy: ', err);
-                copyConfirmation.textContent = 'Failed to copy email address. Please try again.';
-                copyConfirmation.classList.add('show');
-                setTimeout(() => {
-                    copyConfirmation.classList.remove('show');
-                }, 2500); // Adjust timeout for error
+    // Show relevant question when role is selected
+    roleButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            const role = e.target.dataset.role;
+            form.style.display = 'block';
+            if (role === 'mentoring') {
+                mentorQuestionContainer.style.display = 'block';
+                learnerQuestionContainer.style.display = 'none';
+            } else {
+                learnerQuestionContainer.style.display = 'block';
+                mentorQuestionContainer.style.display = 'none';
             }
-            document.body.removeChild(textArea);
+        });
+    });
+
+// JavaScript to toggle the selected state of the buttons
+document.querySelectorAll('.notify-btn').forEach(button => {
+    button.addEventListener('click', function() {
+      // Remove 'selected' from all buttons first
+      document.querySelectorAll('.notify-btn').forEach(btn => btn.classList.remove('selected'));
+  
+      // Add 'selected' class to the clicked button
+      this.classList.add('selected');
+    });
+  });
+  
+  
+    // Handle form submission and write to Google Sheets
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const email = form.querySelector('input[type="email"]').value;
+        const role = document.querySelector('.notify-btn.active').dataset.role;
+        const interest = role === 'mentoring'
+            ? document.getElementById('mentorInterest').value
+            : document.getElementById('learnerInterest').value;
+
+        // Google Apps Script Web App URL
+        const googleAppsScriptUrl = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL'; // Replace with your URL
+
+        const response = await fetch(googleAppsScriptUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: email,
+                role: role,
+                interest: interest,
+            })
+        });
+
+        if (response.ok) {
+            form.style.display = 'none';
+            thankYouMessage.style.display = 'block';
+            thankYouPopup.style.display = 'block';
+        } else {
+            console.error('Failed to submit form data to Google Sheets');
         }
-    };
-
-    // Add event listener to the email button
-    if (emailButton) {
-        emailButton.addEventListener('click', (event) => {
-            event.preventDefault(); // Prevent the default mailto: action
-            copyToClipboard(emailAddress);
-        });
-    } else {
-        console.warn("Email button not found!");
-    }
-
-    // Check local storage on page load
-    const storedPreference = localStorage.getItem(LOCAL_STORAGE_KEY);
-    const initialDarkMode = storedPreference === 'true';
-    setDarkMode(initialDarkMode); // Apply initial state
-
-    // Add event listener to the toggle button
-    if (darkModeToggle) {
-        darkModeToggle.addEventListener('click', () => {
-            setDarkMode(!body.classList.contains('dark')); // Toggle the state
-        });
-    } else {
-        console.warn("Dark mode toggle button not found!");
-    }
-
-    // Add event listener to the form submission
-    if (notifyForm) {
-        notifyForm.addEventListener('submit', handleFormSubmit);
-    } else {
-        console.warn("Notify form not found!");
-    }
-
-    // Initial update of the button text
-    updateToggleButtonText(initialDarkMode);
+    });
 })();
