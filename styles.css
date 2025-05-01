@@ -392,10 +392,10 @@ body.dark .thank-you-popup {
   /* Other button styles */
 }
 
-/* REVISED SPINNER STYLE - GUARANTEED VISIBLE */
+/* KEEP THESE SPINNER STYLES */
 .final-signup-btn.loading {
   position: relative;
-  padding-left: 3rem; /* Space for spinner */
+  padding-left: 3rem;
 }
 
 .final-signup-btn.loading::after {
@@ -406,12 +406,11 @@ body.dark .thank-you-popup {
   transform: translateY(-50%);
   width: 16px;
   height: 16px;
-  border: 3px solid white;
-  border-top-color: var(--accent); /* Uses your accent color */
+  border: 3px solid rgba(255,255,255,0.3);
+  border-top-color: white;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
-  opacity: 1; /* Force visible */
-  z-index: 10; /* Ensure it's above other elements */
+  z-index: 10;
 }
 
 @keyframes spin {
