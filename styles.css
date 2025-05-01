@@ -417,3 +417,50 @@ body.dark .thank-you-popup {
   0% { transform: translateY(-50%) rotate(0deg); }
   100% { transform: translateY(-50%) rotate(360deg); }
 }
+
+/* Email container and copy button styles */
+.email-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.copy-btn {
+  background: transparent;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.copy-btn:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+body.dark .copy-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+#thankYouMessage {
+  display: none;
+  background-color: #4CAF50;
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 20px;
+  text-align: center;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+body.dark #thankYouMessage {
+  background-color: #2E7D32;
+}

@@ -8,6 +8,7 @@
     const learnerQuestionContainer = document.getElementById('learnerQuestionContainer');
     const thankYouMessage = document.getElementById('thankYouMessage');
     const thankYouPopup = document.querySelector('.thank-you-popup');
+    const signupButton = document.querySelector('.final-signup-btn');
 
     let selectedRole = null;
 
@@ -42,4 +43,56 @@
         });
     });
 
+    // Copy email functionality
+    const copyBtn = document.querySelector('.copy-btn');
+    if (copyBtn) {
+        copyBtn.addEventListener('click', () => {
+            const email = 'hello@afterschoolstudyclub.com';
+            navigator.clipboard.writeText(email)
+                .then(() => {
+                    // Show confirmation
+                    const confirmation = document.createElement('div');
+                    confirmation.className = 'copy-confirmation';
+                    confirmation.textContent = 'Email copied to clipboard!';
+                    document.body.appendChild(confirmation);
+                    
+                    // Show and then hide the confirmation
+                    setTimeout(() => {
+                        confirmation.classList.add('show');
+                    }, 10);
+                    
+                    setTimeout(() => {
+                        confirmation.classList.remove('show');
+                        setTimeout(() => {
+                            document.body.removeChild(confirmation);
+                        }, 300);
+                    }, 2000);
+                })
+                .catch(err => {
+                    console.error('Failed to copy email: ', err);
+                });
+        });
+    }
+
+    // Spinner functionality for form submission
+    if (form && signupButton) {
+        form.addEventListener('submit', function() {
+            // Add loading state to button
+            signupButton.classList.add('loading');
+            signupButton.disabled = true;
+            
+            // Show thank you message after submission
+            setTimeout(() => {
+                thankYouMessage.style.display = 'block';
+                form.style.display = 'none';
+                signupButton.classList.remove('loading');
+                signupButton.disabled = false;
+                
+                // Hide the message after 5 seconds
+                setTimeout(() => {
+                    thankYouMessage.style.display = 'none';
+                }, 5000);
+            }, 1500); // Simulate submission delay
+        });
+    }
 })();
