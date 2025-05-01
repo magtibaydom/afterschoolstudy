@@ -114,9 +114,37 @@ body.dark .notify-form textarea {
 /* Default 'For Learners' button style */
 .notify-btn.for-learners {
   background-color: #efb05d; /* Orange color for Learners */
-  color: white; /* Text color remains white */
-  transition: background-color 0.3s ease;
-  font-family: var(--font-primary); /* Use the same font as the body */
+  color: white;
+  transition: all 0.3s ease;
+  font-family: var(--font-primary);
+}
+
+/* 'For Learners' button when selected */
+.notify-btn.for-learners.selected {
+  background-color: #845820; /* Darker orange */
+  transform: scale(1.05); /* Slightly larger */
+  box-shadow: 0 0 0 2px white, 0 0 0 4px #efb05d; /* Double border effect */
+}
+
+/* Default 'For Mentors' button style */
+.notify-btn.for-mentors {
+  background-color: #007bff; /* Blue color for Mentors */
+  color: white;
+  transition: all 0.3s ease;
+  font-family: var(--font-primary);
+}
+
+/* 'For Mentors' button when selected */
+.notify-btn.for-mentors.selected {
+  background-color: #033f7f; /* Darker blue */
+  transform: scale(1.05); /* Slightly larger */
+  box-shadow: 0 0 0 2px white, 0 0 0 4px #007bff; /* Double border effect */
+}
+
+/* Common selected state styles */
+.notify-btn.selected {
+  font-weight: 700; /* Make text bolder */
+  position: relative; /* For potential pseudo-elements */
 }
 
 /* 'For Learners' button hover style */
@@ -124,27 +152,9 @@ body.dark .notify-form textarea {
   background-color: #d79a4b; /* Darkened shade of #efb05d when hovered */
 }
 
-/* 'For Learners' button when selected */
-.notify-btn.for-learners.selected {
-  background-color: #845820; /* Darkened shade of #efb05d when selected */
-}
-
-/* Default 'For Mentors' button style */
-.notify-btn.for-mentors {
-  background-color: #007bff; /* Blue color for Mentors */
-  color: white; /* Text color remains white */
-  transition: background-color 0.3s ease;
-  font-family: var(--font-primary); /* Use the same font as the body */
-}
-
 /* 'For Mentors' button hover style */
 .notify-btn.for-mentors:hover {
   background-color: #0056b3; /* Darkened shade of #007bff when hovered */
-}
-
-/* 'For Mentors' button when selected */
-.notify-btn.for-mentors.selected {
-  background-color: #033f7f; /* Darkened shade of #007bff when selected */
 }
 
 
@@ -378,80 +388,4 @@ body.dark .thank-you-popup {
   padding: 1rem 2rem; /* Adjust padding for a larger button within the box */
   font-size: 1.1rem;
   /* Other button styles */
-}
-
-#questionContainer {
-  display: none; /* Initially hidden */
-  width: 100%;
-  margin-bottom: 1rem;
-}
-
-#questionContainer label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-}
-
-#interestTextarea {
-  width: 100%;
-  min-height: 100px;
-}
-
-/* Role Selection Styles */
-.role-selection {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin: 1.5rem 0;
-}
-
-.role-box {
-  flex: 1;
-  max-width: 200px;
-}
-
-.role-btn {
-  width: 100%;
-  padding: 1rem;
-  border: 2px solid transparent;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-/* Mentor button styles */
-.role-btn[data-role="mentoring"] {
-  background-color: #007bff;
-  color: white;
-  border-radius: 50px;
-}
-
-/* Learner button styles */
-.role-btn[data-role="mentorship"] {
-  background-color: #efb05d;
-  color: white;
-  border-radius: 50px;
-}
-
-/* Selected state styles */
-.role-btn.selected {
-  border-color: white;
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
-  transform: translateY(-2px);
-}
-
-/* Hover states */
-.role-btn[data-role="mentoring"]:hover {
-  background-color: #0069d9;
-}
-
-.role-btn[data-role="mentorship"]:hover {
-  background-color: #e0a347;
-}
-
-/* Dark mode adjustments */
-body.dark .role-btn.selected {
-  box-shadow: 0 0 0 3px rgba(0, 191, 255, 0.5);
 }
