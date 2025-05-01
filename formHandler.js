@@ -1,8 +1,3 @@
-// formhandler.js - Handles form submission to Google Sheets
-
-// Wait for DOM to be fully loaded
-// formhandler.js - Updated to properly handle role selection
-
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.querySelector('.notify-form');
     const thankYouPopup = document.querySelector('.thank-you-popup');
@@ -13,32 +8,33 @@ document.addEventListener('DOMContentLoaded', function() {
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
         
-        // Get current selected role
-        const selectedButton = document.querySelector('.role-btn.selected');
-        if (!selectedButton) {
-            alert('Please select your role (Mentor or Learner)');
-            return;
-        }
-        
-        const role = selectedButton.dataset.role;
-        const email = form.querySelector('input[type="email"]').value.trim();
-        const interestField = role === 'mentor' ? 
-            document.getElementById('mentorInterest') : 
-            document.getElementById('learnerInterest');
-        const interest = interestField ? interestField.value.trim() : '';
-        
-        // Validation (only email and interest)
-        if (!email) {
-            alert('Please enter your email');
-            return;
-        }
-        
-        if (!interest) {
-            alert('Please tell us what you want to teach/learn');
-            return;
-        }
+        // ===== NEW: Get submit button and save original text =====
+        const submitBtn = form.querySelector('.final-signup-btn');
+        const originalBtnText = submitBtn.textContent;
         
         try {
+            // ===== NEW: Show loading state =====
+            submitBtn.textContent = "Signing up...";
+            submitBtn.classList.add('loading');
+            submitBtn.disabled = true;
+            
+            // Get current selected role
+            const selectedButton = document.querySelector('.role-btn.selected');
+            if (!selectedButton) {
+                throw new Error('Please select your role (Mentor or Learner)');
+            }
+            
+            const role = selectedButton.dataset.role;
+            const email = form.querySelector('input[type="email"]').value.trim();
+            const interestField = role === 'mentor' ? 
+                document.getElementById('mentorInterest') : 
+                document.getElementById('learnerInterest');
+            const interest = interestField ? interestField.value.trim() : '';
+            
+            // Validation
+            if (!email) throw new Error('Please enter your email');
+            if (!interest) throw new Error('Please tell us what you want to teach/learn');
+            
             const scriptUrl = 'https://script.google.com/macros/s/AKfycbwI8WadRTxgoEEqcDgjHnor0vyIRKhjtzNK--BZ1_GzVEGPHUTNR1t-f_iin0tdWkiF/exec';
             
             const response = await fetch(scriptUrl, {
@@ -69,7 +65,12 @@ document.addEventListener('DOMContentLoaded', function() {
             
         } catch (error) {
             console.error('Submission error:', error);
-            alert('Submission failed. Please try again later.');
+            alert(error.message); // ===== CHANGED: Now shows the specific error
+        } finally {
+            // ===== NEW: Always restore button state =====
+            submitBtn.textContent = originalBtnText;
+            submitBtn.classList.remove('loading');
+            submitBtn.disabled = false;
         }
     });
 });
