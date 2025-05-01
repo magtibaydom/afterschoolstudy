@@ -74,7 +74,7 @@
         let charIndex = 0;
         let isTyping = true;
         let pauseEnd = false;
-        const typeSpeed = 20; // Adjust typing speed (milliseconds per character)
+        const typeSpeed = 30; // Adjust typing speed (milliseconds per character)
         const pauseDuration = 1000; // Adjust pause duration (milliseconds) after a phrase
 
         return setInterval(() => {
@@ -117,10 +117,17 @@
                 mentorQuestionContainer.style.display = 'block';
                 learnerQuestionContainer.style.display = 'none';
                 mentorInterval = startTypingEffect(mentorInterestTextarea, mentorPhrases, "I'd like to teach ");
+                mentorInterestTextarea.required = true;
+                learnerInterestTextarea.required = false;
             } else if (selectedRole === 'learner') {
                 learnerQuestionContainer.style.display = 'block';
                 mentorQuestionContainer.style.display = 'none';
                 learnerInterval = startTypingEffect(learnerInterestTextarea, learnerPhrases, "I'd like to learn ");
+                learnerInterestTextarea.required = true;
+                mentorInterestTextarea.required = false;
+            } else {
+                mentorInterestTextarea.required = false;
+                learnerInterestTextarea.required = false;
             }
 
             // Highlight selected role
