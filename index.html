@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>After School Study Club - Under Construction</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚧</text></svg>">
     <link rel="stylesheet" href="styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 </head>
 <body>
-    <div class="container">
+    <div class="main-container">
         <a href="https://days.afterschoolstudyclub.com" target="_blank" style="text-decoration: none; color: inherit;">
             <div class="emoji">🚧</div>
         </a>
@@ -28,22 +29,35 @@
         </div>
           </div>
           
+          <div class="form-container">
           <form class="notify-form" style="display: none;">
             <div id="mentorQuestionContainer" style="display: none;">
               <label for="mentorInterest">What would you like to teach?</label>
               <textarea id="mentorInterest" placeholder="I'd like to teach..."></textarea>
             </div>
+
             <div id="learnerQuestionContainer" style="display: none;">
               <label for="learnerInterest">What would you like to learn?</label>
               <textarea id="learnerInterest" placeholder="I'd like to learn..."></textarea>
             </div>
-          
-            <input type="email" placeholder="you@example.com" required />
-            
-            <button type="submit" class="final-signup-btn">Sign Up</button>
+
+            <div>
+              <label for="email">Email:</label>
+              <input type="email" placeholder="you@example.com" required />
+
+              <div>
+                <div class="privacy-checkbox">
+                  <input type="checkbox" id="privacy" name="privacy" required>
+                  <label for="privacy">I agree to the <a href="/privacy-policy.html" target="_blank">Privacy Policy</a>.</label>
+                </div>
+
+              </div>
+              
+              <button type="submit" class="final-signup-btn">Sign Up</button>
+            </div>
           </form>
-        
-          <div id="thankYouMessage" style="display: none;">Thanks for signing up!</div>
+        </div>
+          <div id="thankYouMessage" style="display: none;">Thanks for signing up! We will contact you soon.</div>
           <div class="thank-you-popup" style="display: none;">🎉 You're in!</div>
           
 

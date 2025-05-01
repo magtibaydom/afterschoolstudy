@@ -91,7 +91,7 @@
                 // Hide the message after 5 seconds
                 setTimeout(() => {
                     thankYouMessage.style.display = 'none';
-                }, 5000);
+                }, 15000);
             }, 1500); // Simulate submission delay
         });
     }

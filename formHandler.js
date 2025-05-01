@@ -54,7 +54,6 @@ document.addEventListener('DOMContentLoaded', function() {
       .then(response => response.json())
       .then(data => {
         if (data.result === 'success') {
-          alert('Thank you for signing up!');
           notifyForm.reset();
           notifyForm.style.display = 'none';
           mentorQuestionContainer.style.display = 'none';

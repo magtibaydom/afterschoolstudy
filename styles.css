@@ -48,7 +48,7 @@ body.dark {
   background-image: linear-gradient(to bottom, var(--dark-bg-gradient-start), var(--dark-bg-gradient-end)); /* Dark gradient */
 }
 
-.container {
+.main-container {
   width: 90%;
   max-width: 600px;
   padding: 2rem;
@@ -59,10 +59,31 @@ body.dark {
   transition: background-color 0.3s ease;
 }
 
-body.dark .container {
-  background-color: var(--dark-bg-gradient-start); /* Use dark gradient start as container background */
-  color: var(--text); /* Ensure text inside container is readable */
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05); /* Subtle light shadow for contrast */
+/* Styles specifically for the privacy policy container */
+.privacy-container {
+  width: 100%; /* Or your desired width */
+  max-width: 1200px; /* Or your desired wider maximum width */
+  padding: 2rem; /* You might want to keep the padding */
+  background-color: var(--bg); /* Ensure it has a background */
+  border-radius: 8px; /* Keep the border radius for consistency */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Keep the shadow */
+  text-align: left; /* Align text to the left for better readability of policy */
+  transition: background-color 0.3s ease; /* Keep the transition */
+  margin: 0 auto; /* Center the wider container */
+}
+
+body.dark .main-container {
+  background-color: var(--dark-bg-gradient-start);
+  color: var(--text);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
+}
+
+body.dark .privacy-container {
+  background-color: var(--dark-bg-gradient-start);
+  color: var(--text);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
+  text-align: left; /* Keep left alignment in dark mode */
+  margin: 0 auto; /* Center in dark mode */
 }
 
 /* Signup Form */
@@ -74,12 +95,13 @@ body.dark .container {
   width: 100%;
 }
 
-.notify-form label {
-  text-align: center;
+.notify-form label:not([for="privacy"]) {
+  text-align: left;
   display: block;
   font-size: 1.1rem;
   width: 100%;
   margin-bottom: 0.3rem;
+  margin-left: 3rem;
 }
 
 .notify-form textarea {
@@ -95,7 +117,7 @@ body.dark .container {
   max-width: 80%; /* Match email input max-width */
   min-height: 70px; /* Slightly increased minimum height */
   resize: vertical; /* Allow vertical resizing */
-  text-align: center; /* Center initial placeholder text */
+  text-align: left; /* Center initial placeholder text */
   margin-bottom: 0.8rem; /* Add some space below the textarea */
 }
 
@@ -463,4 +485,80 @@ body.dark .copy-btn:hover {
 
 body.dark #thankYouMessage {
   background-color: #2E7D32;
+}
+
+.privacy-checkbox {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem; /* Add some space above the privacy policy */
+}
+
+
+input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+}
+
+/* ... other styles ... */
+
+/* Styles specifically for the privacy policy container */
+.privacy-content {
+  line-height: 1.6; /* Improved line spacing for readability */
+  margin-bottom: 2rem; /* Space before the footer */
+}
+
+.privacy-content h2 {
+  font-size: 1.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--accent); /* Use your accent color for headings */
+}
+
+.privacy-content p {
+  margin-bottom: 1rem;
+}
+
+.privacy-content strong {
+  font-weight: 700; /* Make important text bold */
+}
+
+.privacy-content a {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.privacy-content a:hover {
+  color: var(--dark-accent); /* Darker accent on hover */
+}
+
+body.dark .privacy-container {
+  background-color: var(--dark-bg-gradient-start);
+  color: var(--text);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
+}
+
+body.dark .privacy-content h2 {
+  color: var(--dark-accent); /* Dark mode accent for headings */
+}
+
+body.dark .privacy-content a {
+  color: var(--dark-accent);
+}
+
+body.dark .privacy-content a:hover {
+  color: var(--accent); /* Light accent on hover in dark mode */
+}
+
+/* Ensure footer is styled consistently */
+.footer {
+  margin-top: 2rem; /* Add some space above the footer */
+  font-size: 1rem;
+  color: var(--accent);
+  text-align: center; /* Center the footer text */
+}
+
+body.dark .footer {
+  color: var(--dark-accent);
 }
