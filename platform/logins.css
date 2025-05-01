@@ -1,0 +1,197 @@
+/* Root variables for light and dark themes (copy from styles.css) */
+:root {
+  --bg: #f8f9fa; /* Light background */
+  --text: #333333; /* Dark text */
+  --accent: #0056b3; /* Original accent blue */
+  --dark-accent:  #00bfff; /* Dark mode accent blue */
+  --button-bg: #007bff; /* A deeper blue for buttons */
+  --button-hover-bg: #0056b3; /* Even darker for hover */
+  --font-primary: 'Plus Jakarta Sans', sans-serif;
+  --light-bg-gradient-start: #aae2f8;
+  --light-bg-gradient-end: #f5e1c7;
+  --dark-bg-gradient-start: #121212;
+  --dark-bg-gradient-end: #6393a7;
+  --toggle-text-light: #333333; /* Dark text for toggle in light mode */
+}
+
+/* Dark theme variables (applied when the 'dark' class is on the body) */
+body.dark {
+  --bg: #121212; /* Dark background (fallback) */
+  --text: #ffffff; /* Light text */
+  --toggle-text-light: #ffffff; /* Light text for toggle in dark mode */
+}
+
+/* Base styles (similar to body in styles.css) */
+body {
+  font-family: var(--font-primary);
+  background-color: var(--light-bg-gradient-start); /* Fallback for older browsers */
+  background-image: linear-gradient(to bottom, var(--light-bg-gradient-start), var(--light-bg-gradient-end)); /* Light gradient */
+  color: var(--text);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease, background-image 0.3s ease;
+}
+
+body.dark {
+  background-color: var(--dark-bg-gradient-start); /* Fallback for older browsers */
+  background-image: linear-gradient(to bottom, var(--dark-bg-gradient-start), var(--dark-bg-gradient-end)); /* Dark gradient */
+}
+
+/* ... other styles in logins.css ... */
+
+.main-container {
+    width: 90%;
+    max-width: 800px; /* Increase max-width to accommodate side-by-side layout */
+    padding: 2rem;
+    background-color: var(--bg);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex; /* Enable flexbox for main container */
+    align-items: center; /* Vertically align greetings and form */
+    justify-content: space-between; /* Put space between greetings and form */
+    transition: background-color 0.3s ease;
+    flex-wrap: wrap; /* Allow content to wrap on smaller screens */
+  }
+  
+  body.dark .main-container {
+    background-color: var(--dark-bg-gradient-start);
+    color: var(--text);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
+  }
+  
+  .greetings {
+    text-align: left; /* Align content within greetings to the left */
+    flex: 1; /* Allow greetings to take up available space */
+    padding-right: 2rem; /* Add some spacing between greetings and form */
+    min-width: 300px; /* Ensure greetings don't get too narrow */
+  }
+  
+  #pagename {
+    margin-bottom: 0.5rem;
+  }
+  
+  .dark-toggle {
+    background: transparent;
+    border: 1px solid var(--accent);
+    padding: 0.5rem 1rem;
+    color: var(--toggle-text-light);
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 50px;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    text-align: left; /* Align text within the button to the left */
+    display: block; /* Make it a block element to take full width of greetings */
+    width: fit-content; /* Adjust width to content */
+  }
+  
+  .dark-toggle:hover {
+    background-color: var(--accent);
+    color: var(--bg);
+  }
+  
+  .form-container {
+    flex: 1; /* Allow form container to take up available space */
+    text-align: left; /* Align content within form container to the left */
+    min-width: 300px; /* Ensure form doesn't get too narrow */
+  }
+  
+  .notify-form {
+    display: flex;
+    vertical-align: center; /* Center align form elements vertically */
+    flex-direction: column;
+    gap: 0.8rem;
+    width: 100%;
+    max-width: 600px; /* Adjust max-width of the form itself */
+  }
+  
+  .notify-form label {
+    text-align: left;
+    display: block;
+    font-size: 1.1rem;
+    width: 100%;
+    margin-bottom: 0.3rem;
+  }
+  
+  .notify-form input[type="email"],
+  .notify-form input[type="password"] {
+    padding: 0.75rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    color: var(--text);
+    background-color: var(--bg);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    width: 100%;
+margin-bottom: 1rem;
+    box-sizing: border-box;
+    text-align: left;
+  }
+  
+  .final-signup-btn {
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+    background-color: var(--button-bg);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+  }
+  
+  #loginError {
+    color: red;
+    margin-top: 1rem;
+    text-align: left; /* Align error message to the left */
+    display: none;
+  }
+  
+  .footer {
+    margin-top: 2rem;
+    font-size: 1rem;
+    color: var(--accent);
+    text-align: left;
+    width: 100%; /* Make footer full width below the flex layout */
+  }
+  
+  /* Media query for smaller screens to stack greetings and form */
+  @media (max-width: 600px) {
+    .main-container {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .greetings {
+      padding-right: 0;
+      margin-bottom: 2rem;
+      width: 100%;
+    }
+  
+    .form-container {
+      width: 100%;
+    }
+  }
+
+.dark-toggle {
+    background: transparent;
+    border: 1px solid var(--accent);
+    padding: 0.5rem 1rem;
+    color: var(--toggle-text-light);
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 50px; 
+    margin-bottom: 0.3rem;
+    transition: all 0.3s ease;
+  }
+  
+  .dark-toggle:hover {
+    background-color: var(--accent);
+    color: var(--bg);
+  }
