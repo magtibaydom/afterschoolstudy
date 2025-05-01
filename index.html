@@ -19,34 +19,40 @@
         <h1 id="pagename">After School Study Club</h1>
         <p>We’re cooking up something awesome.</p>
 
-        <div class="role-selection">
-            <div class="role-box">
-              <button type="button" class="notify-btn role-btn" data-role="mentoring">For Mentors</button>
-            </div>
-            <div class="role-box">
-              <button type="button" class="notify-btn role-btn" data-role="mentorship">For Learners</button>
-            </div>
-          </div>
-          
-          <form class="notify-form" style="display: none;">
-            <div id="mentorQuestionContainer" style="display: none;">
-              <label for="mentorInterest">What would you like to teach?</label>
-              <textarea id="mentorInterest" placeholder="I'd like to teach..."></textarea>
-            </div>
-            <div id="learnerQuestionContainer" style="display: none;">
-              <label for="learnerInterest">What would you like to learn?</label>
-              <textarea id="learnerInterest" placeholder="I'd like to learn..."></textarea>
-            </div>
-          
-            <input type="email" placeholder="you@example.com" required />
-            
-            <button type="submit" class="final-signup-btn">Sign Up</button>
-          </form>
-          
-          <!-- Optional: Thank you message/popup container -->
-          <div id="thankYouMessage" style="display: none;">Thanks for signing up!</div>
-          <div class="thank-you-popup" style="display: none;">🎉 You're in!</div>
-          
+<!-- Role Selection -->
+<div class="role-selection">
+  <div class="role-box">
+      <button type="button" class="notify-btn role-btn" data-role="mentoring">For Mentors</button>
+  </div>
+  <div class="role-box">
+      <button type="button" class="notify-btn role-btn" data-role="mentorship">For Learners</button>
+  </div>
+</div>
+
+<!-- Form -->
+<form class="notify-form" style="display: none;">
+  <!-- Mentor Question -->
+  <div id="mentorQuestionContainer" style="display: none;">
+      <label for="mentorInterest">What would you like to teach?</label>
+      <textarea id="mentorInterest" placeholder="I'd like to teach..."></textarea>
+  </div>
+  
+  <!-- Learner Question -->
+  <div id="learnerQuestionContainer" style="display: none;">
+      <label for="learnerInterest">What would you like to learn?</label>
+      <textarea id="learnerInterest" placeholder="I'd like to learn..."></textarea>
+  </div>
+  
+  <!-- Email -->
+  <input type="email" placeholder="you@example.com" required />
+  
+  <!-- Submit -->
+  <button type="submit" class="final-signup-btn">Sign Up</button>
+</form>
+
+<!-- Messages -->
+<div id="thankYouMessage" style="display: none;">Thanks for signing up!</div>
+<div class="thank-you-popup" style="display: none;">🎉 You're in!</div>
 
         <div class="email-contact">
             <p>Have questions or want to get in touch?</p>
@@ -58,6 +64,6 @@
         <div class="footer">Not a masterclass. Just a good start.</div>
     </div>
 
-    <script src="scripts.js"></script>
+    <script src="scripts.js" type="module"></script>
 </body>
 </html>

@@ -379,3 +379,79 @@ body.dark .thank-you-popup {
   font-size: 1.1rem;
   /* Other button styles */
 }
+
+#questionContainer {
+  display: none; /* Initially hidden */
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+#questionContainer label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+#interestTextarea {
+  width: 100%;
+  min-height: 100px;
+}
+
+/* Role Selection Styles */
+.role-selection {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.role-box {
+  flex: 1;
+  max-width: 200px;
+}
+
+.role-btn {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Mentor button styles */
+.role-btn[data-role="mentoring"] {
+  background-color: #007bff;
+  color: white;
+  border-radius: 50px;
+}
+
+/* Learner button styles */
+.role-btn[data-role="mentorship"] {
+  background-color: #efb05d;
+  color: white;
+  border-radius: 50px;
+}
+
+/* Selected state styles */
+.role-btn.selected {
+  border-color: white;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Hover states */
+.role-btn[data-role="mentoring"]:hover {
+  background-color: #0069d9;
+}
+
+.role-btn[data-role="mentorship"]:hover {
+  background-color: #e0a347;
+}
+
+/* Dark mode adjustments */
+body.dark .role-btn.selected {
+  box-shadow: 0 0 0 3px rgba(0, 191, 255, 0.5);
+}
