@@ -14,7 +14,7 @@
         // Function to set the theme based on preference
         const setTheme = (isDark) => {
             document.body.classList.toggle('dark', isDark);
-            darkModeToggle.innerText = isDark ? '☀️ Light Mode' : '🌑 Dark Mode';
+            darkModeToggle.innerText = isDark ? '☀️' : '🌙'; // Change icon based on theme
         };
     
         // Check for device preference on initial load
