@@ -1,23 +1,35 @@
 (() => {
     console.log("Dark mode script is running.");
 
-    const darkModeToggle = document.getElementById('darkModeToggle');
-    const roleButtons = document.querySelectorAll('.role-btn');
-    const form = document.querySelector('.notify-form');
-    const mentorQuestionContainer = document.getElementById('mentorQuestionContainer');
-    const learnerQuestionContainer = document.getElementById('learnerQuestionContainer');
-    const thankYouMessage = document.getElementById('thankYouMessage');
-    const thankYouPopup = document.querySelector('.thank-you-popup');
-    const signupButton = document.querySelector('.final-signup-btn');
-
-    let selectedRole = null;
-
-    // Dark mode toggle logic
-    darkModeToggle?.addEventListener('click', () => {
-        document.body.classList.toggle('dark');
-        const isDark = document.body.classList.contains('dark');
-        darkModeToggle.innerText = isDark ? '☀️ Light Mode' : '🌑 Dark Mode';
-    });
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const roleButtons = document.querySelectorAll('.role-btn');
+        const form = document.querySelector('.notify-form');
+        const mentorQuestionContainer = document.getElementById('mentorQuestionContainer');
+        const learnerQuestionContainer = document.getElementById('learnerQuestionContainer');
+        const thankYouMessage = document.getElementById('thankYouMessage');
+        const signupButton = document.querySelector('.final-signup-btn');
+    
+        let selectedRole = null;
+    
+        // Function to set the theme based on preference
+        const setTheme = (isDark) => {
+            document.body.classList.toggle('dark', isDark);
+            darkModeToggle.innerText = isDark ? '☀️ Light Mode' : '🌑 Dark Mode';
+        };
+    
+        // Check for device preference on initial load
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme(true); // Set to dark mode if preferred
+        } else {
+            setTheme(false); // Set to light mode if preferred or no preference
+        }
+    
+        // Dark mode toggle logic
+        darkModeToggle?.addEventListener('click', () => {
+            const isCurrentlyDark = document.body.classList.contains('dark');
+            setTheme(!isCurrentlyDark); // Toggle the theme
+        });
+    
 
     // Show relevant question when role is selected
     roleButtons.forEach(button => {
