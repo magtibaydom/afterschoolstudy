@@ -95,7 +95,7 @@ setTimeout(() => {
     setTimeout(() => {
         languageToggle.checked = !languageToggle.checked;
         languageToggle.dispatchEvent(new Event('change'));
-    }, 5); // toggle back after 100ms
+    }, 40); // toggle back after 100ms
 }, 200); // wait just enough for DOM to settle
 
 
@@ -259,4 +259,15 @@ roleButtons.forEach(button => {
             }, 1500);
         });
     }
+
+    window.onload = function () {
+        const loadingScreen = document.getElementById("loading-screen");
+      
+        // Hide the loading screen after 3 seconds (or adjust the time as needed)
+        setTimeout(function () {
+          loadingScreen.style.opacity = "0";
+          loadingScreen.style.visibility = "hidden";
+        }, 2000); // Change the duration as needed
+      };
+      
 })();

@@ -620,3 +620,38 @@ body.dark .toggle-text {
 #languageToggle:checked + .toggle-slider:before {
   transform: translateY(-50%) translateX(20px);
 }
+
+/* Full-screen overlay */
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff; /* Simple background color */
+  z-index: 9999; /* Ensure it appears on top */
+}
+
+/* Flowing color text */
+.loading-text {
+  font-size: 40px; /* Adjust size */
+  font-weight: bold;
+  color: transparent;
+  background: linear-gradient(45deg, #295b85, #feb47b, #f1f694);
+  background-size: 200% 200%; /* Make the gradient big enough to move */
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: flowingText 2s linear infinite;
+}
+
+@keyframes flowingText {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
