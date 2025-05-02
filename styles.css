@@ -11,7 +11,7 @@
   --bg: #f8f9fa; /* Light background */
   --text: #333333; /* Dark text */
   --accent: #0056b3; /* Original accent blue */
-  --dark-accent:  #00bfff; /* Dark mode accent blue */
+  --dark-accent: #00bfff; /* Dark mode accent blue */
   --button-bg: #007bff; /* A deeper blue for buttons */
   --button-hover-bg: #0056b3; /* Even darker for hover */
   --font-primary: 'Plus Jakarta Sans', sans-serif;
@@ -48,54 +48,41 @@ body.dark {
   background-image: linear-gradient(to bottom, var(--dark-bg-gradient-start), var(--dark-bg-gradient-end)); /* Dark gradient */
 }
 
-.main-container {
+.main-container,
+.privacy-container {
   width: 100%;
-  max-width: 600px;
   padding: 1rem;
   background-color: var(--bg);
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   text-align: center;
   transition: background-color 0.3s ease;
+  margin: 0 auto; /* Center the wider container */
+}
+
+.main-container {
+  max-width: 600px;
 }
 
 /* Styles specifically for the privacy policy container */
 .privacy-container {
-  width: 100%; /* Or your desired width */
   max-width: 1200px; /* Or your desired wider maximum width */
   padding: 2rem; /* You might want to keep the padding */
-  background-color: var(--bg); /* Ensure it has a background */
-  border-radius: 8px; /* Keep the border radius for consistency */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Keep the shadow */
   text-align: left; /* Align text to the left for better readability of policy */
-  transition: background-color 0.3s ease; /* Keep the transition */
-  margin: 0 auto; /* Center the wider container */
 }
 
-body.dark .main-container {
+body.dark .main-container,
+body.dark .privacy-container {
   background-color: var(--dark-bg-gradient-start);
   color: var(--text);
   box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
 }
 
+/* Media query for screens smaller than 600px (typical mobile screens) */
 @media (max-width: 600px) {
   .main-container {
     background-color: transparent; /* Remove background color */
     box-shadow: none; /* Remove drop shadow */
-    padding: 1.5rem; /* Adjust padding if needed */
-    border-radius: 0; /* Remove border radius for a full-width look if desired */
-  }
-}
-
-@media (max-width: 600px) {
-  body.dark .main-container {
-    background-color: transparent; /* Ensure transparent in dark mode as well */
-    box-shadow: none; /* Ensure no shadow in dark mode */
-  }
-
-  .main-container {
-    background-color: transparent; /* Remove background color for light mode */
-    box-shadow: none; /* Remove drop shadow for light mode */
     padding: 1.5rem; /* Adjust padding if needed */
     border-radius: 0; /* Remove border radius for a full-width look if desired */
   }
@@ -106,14 +93,6 @@ body.dark .main-container {
   .main-container {
     padding: 1rem; /* Further adjust padding for very small screens */
   }
-}
-
-body.dark .privacy-container {
-  background-color: var(--dark-bg-gradient-start);
-  color: var(--text);
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
-  text-align: left; /* Keep left alignment in dark mode */
-  margin: 0 auto; /* Center in dark mode */
 }
 
 /* Signup Form */
@@ -134,7 +113,9 @@ body.dark .privacy-container {
   margin-left: 3rem;
 }
 
-.notify-form textarea {
+.notify-form textarea,
+.notify-form input[type="email"],
+.notify-form input {
   padding: 0.75rem;
   font-family: var(--font-primary); /* Use the same font as the body */
   font-size: 1rem;
@@ -143,115 +124,32 @@ body.dark .privacy-container {
   color: var(--text);
   background-color: var(--bg);
   transition: background-color 0.3s ease, color 0.3s ease;
-  width: 80%; /* Match email input width */
-  max-width: 80%; /* Match email input max-width */
+  width: 80%;
+  max-width: 80%;
+}
+
+.notify-form textarea {
   min-height: 70px; /* Slightly increased minimum height */
   resize: vertical; /* Allow vertical resizing */
   text-align: left; /* Center initial placeholder text */
   margin-bottom: 0.8rem; /* Add some space below the textarea */
 }
 
-body.dark .notify-form textarea {
-  color: var(--text);
-  background-color: var(--dark-bg-gradient-start);
-  border-color: #555;
-}
-
 .notify-form input#mentorInterest, /* Target interest inputs directly */
 .notify-form input#learnerInterest {
-  width: 80%;
-  max-width: 300px;
+  max-width: 300px; /* Override the general max-width */
 }
-
-/* Default 'For Learners' button style */
-.notify-btn.for-learners {
-  background-color: #efb05d; /* Orange color for Learners */
-  color: white;
-  transition: all 0.3s ease;
-  font-family: var(--font-primary);
-}
-
-/* 'For Learners' button when selected */
-.notify-btn.for-learners.selected {
-  background-color: #845820; /* Darker orange */
-  transform: scale(1.05); /* Slightly larger */
-  box-shadow: 0 0 0 2px white, 0 0 0 4px #efb05d; /* Double border effect */
-}
-
-/* Default 'For Mentors' button style */
-.notify-btn.for-mentors {
-  background-color: #007bff; /* Blue color for Mentors */
-  color: white;
-  transition: all 0.3s ease;
-  font-family: var(--font-primary);
-}
-
-/* 'For Mentors' button when selected */
-.notify-btn.for-mentors.selected {
-  background-color: #033f7f; /* Darker blue */
-  transform: scale(1.05); /* Slightly larger */
-  box-shadow: 0 0 0 2px white, 0 0 0 4px #007bff; /* Double border effect */
-}
-
-/* Common selected state styles */
-.notify-btn.selected {
-  font-weight: 700; /* Make text bolder */
-  position: relative; /* For potential pseudo-elements */
-}
-
-/* 'For Learners' button hover style */
-.notify-btn.for-learners:hover {
-  background-color: #d79a4b; /* Darkened shade of #efb05d when hovered */
-}
-
-/* 'For Mentors' button hover style */
-.notify-btn.for-mentors:hover {
-  background-color: #0056b3; /* Darkened shade of #007bff when hovered */
-}
-
-
-input[type="email"] {
-  width: 80%;
-  max-width: 80%;
-  font-family: var(--font-primary); /* Use the same font as the body */
-}
-
-
 
 .notify-form input#email {
-  padding: 0.75rem;
-  font-size: 1rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  color: var(--text);
-  background-color: var(--bg);
-  transition: background-color 0.3s ease, color 0.3s ease;
-  width: 80%;
-  max-width: 80%;
-  text-align: center;
+  text-align: center; /* Specific to email input */
 }
 
-body.dark .notify-form input#email {
+body.dark .notify-form textarea,
+body.dark .notify-form input[type="email"],
+body.dark .notify-form input {
   color: var(--text);
   background-color: var(--dark-bg-gradient-start);
   border-color: #555;
-}
-
-.notify-form .final-signup-btn {
-  padding: 0.8rem 2rem;
-  font-size: 1.1rem;
-  background-color: var(--button-bg);
-  color: white;
-  border: none;
-  border-radius: 50px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 1rem; /* Increased margin to add more space */
-
-}
-
-.notify-form .final-signup-btn:hover {
-  background-color: var(--button-hover-bg);
 }
 
 /* Role selection button and layout */
@@ -271,26 +169,68 @@ body.dark .notify-form input#email {
   cursor: pointer;
   transition: background-color 0.3s ease;
   flex-grow: 1; /* Distribute space equally between buttons */
+  font-family: var(--font-primary); /* Added font-family here */
 }
 
 .notify-btn:hover {
   background-color: var(--button-hover-bg);
 }
 
-.notify-form input {
-  padding: 0.75rem;
-  font-size: 1rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  color: var(--text);
-  background-color: var(--bg);
-  transition: background-color 0.3s ease, color 0.3s ease;
+/* Default 'For Learners' button style */
+.notify-btn.for-learners {
+  background-color: #efb05d; /* Orange color for Learners */
 }
 
-body.dark .notify-form input {
-  color: var(--text);
-  background-color: var(--dark-bg-gradient-start); /* Match container background */
-  border-color: #555; /* Slightly lighter border for input in dark mode */
+/* 'For Learners' button when selected */
+.notify-btn.for-learners.selected {
+  background-color: #845820; /* Darker orange */
+  transform: scale(1.1); /* Slightly larger */
+  box-shadow: 0 0 0 2px white, 0 0 0 4px #efb05d; /* Double border effect */
+  transition: transform 0.3s ease;
+}
+
+/* Default 'For Mentors' button style */
+.notify-btn.for-mentors {
+  background-color: #007bff; /* Blue color for Mentors */
+}
+
+/* 'For Mentors' button when selected */
+.notify-btn.for-mentors.selected {
+  background-color: #033f7f; /* Darker blue */
+  transform: scale(1.1); /* Slightly larger */
+  box-shadow: 0 0 0 2px white, 0 0 0 4px #007bff; /* Double border effect */
+  transition: transform 0.3s ease;
+}
+
+.notify-btn.selected {
+  transform: scale(1.1); /* Adjust the scale factor as needed */
+  transition: transform 0.3s ease; /* Add a smooth transition */
+}
+
+/* 'For Learners' button hover style */
+.notify-btn.for-learners:hover {
+  background-color: #d79a4b; /* Darkened shade of #efb05d when hovered */
+}
+
+/* 'For Mentors' button hover style */
+.notify-btn.for-mentors:hover {
+  background-color: #0056b3; /* Darkened shade of #007bff when hovered */
+}
+
+.notify-form .final-signup-btn {
+  padding: 0.8rem 2rem;
+  font-size: 1.1rem;
+  background-color: var(--button-bg);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem; /* Increased margin to add more space */
+}
+
+.notify-form .final-signup-btn:hover {
+  background-color: var(--button-hover-bg);
 }
 
 .emoji {
@@ -383,6 +323,7 @@ p {
     padding: 0.6rem 1rem; /* Further reduced padding */
   }
 }
+
 .footer {
   margin-top: 2rem;
   font-size: 1rem;
@@ -411,16 +352,15 @@ body.dark .thank-you-popup {
   border: 1px solid #1e362b;
 }
 
-/* ... other styles ... */
-
 .copy-btn:hover {
   transform: scale(1.3);
 }
+
 .copy-confirmation {
   position: fixed;
   left: 50%;
   bottom: 20px; /* Adjust as needed */
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(20px); /* Combined transform */
   background-color: rgba(0, 0, 0, 0.8);
   color: white;
   padding: 1rem 2rem;
@@ -429,8 +369,7 @@ body.dark .thank-you-popup {
   text-align: center;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; /* Added transform to transition */
-  transform: translateY(20px) translateX(-50%); /* Start a bit below */
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
 .copy-confirmation.show {
