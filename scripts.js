@@ -119,7 +119,19 @@ setTimeout(() => {
 
     // TYPING EFFECT FUNCTION
     const startTypingEffect = (textarea, phrases, prefix) => {
-        let phraseIndex = 0;
+        let lastIndex = -1;
+
+        const getRandomIndex = () => {
+            let newIndex;
+            do {
+                newIndex = Math.floor(Math.random() * phrases.length);
+            } while (newIndex === lastIndex && phrases.length > 1);
+            lastIndex = newIndex;
+            return newIndex;
+        };
+        
+        let phraseIndex = getRandomIndex();
+        
         let charIndex = 0;
         let isTyping = true;
         let pauseEnd = false;
@@ -144,7 +156,7 @@ setTimeout(() => {
 
                 if (charIndex < 0) {
                     isTyping = true;
-                    phraseIndex = (phraseIndex + 1) % phrases.length;
+                    phraseIndex = getRandomIndex();
                     charIndex = 0;
                 }
             }
@@ -160,21 +172,19 @@ roleButtons.forEach(button => {
         // Clear any existing typing effects before starting a new one
         clearInterval(mentorInterval);
         clearInterval(learnerInterval);
-        
-        // Reset placeholders
-        mentorInterestTextarea.placeholder = "";
-        learnerInterestTextarea.placeholder = "";
 
         if (selectedRole === 'mentor') {
             mentorQuestionContainer.style.display = 'block';
             learnerQuestionContainer.style.display = 'none';
             
             const prefix = translations[currentLanguage].mentorInterestPrefix || "I'd like to teach ";
+            mentorInterestTextarea.placeholder = prefix; // Keep the prefix before typing
             mentorInterval = startTypingEffect(
-                mentorInterestTextarea,
-                translations[currentLanguage].mentorPhrases || [],
-                prefix
-            );
+            mentorInterestTextarea,
+            translations[currentLanguage].mentorPhrases || [],
+            prefix
+);
+
             
             mentorInterestTextarea.required = true;
             learnerInterestTextarea.required = false;
@@ -182,12 +192,14 @@ roleButtons.forEach(button => {
             learnerQuestionContainer.style.display = 'block';
             mentorQuestionContainer.style.display = 'none';
 
-            const prefix = learnerInterestTextarea.placeholder || "I'd like to learn ";
+            const prefix = translations[currentLanguage].learnerInterestPrefix || "I'd like to learn ";
+            learnerInterestTextarea.placeholder = prefix; // Keep the prefix before typing
             learnerInterval = startTypingEffect(
-                learnerInterestTextarea,
-                translations[currentLanguage].learnerPhrases || [],
-                prefix
-            );
+            learnerInterestTextarea,
+            translations[currentLanguage].learnerPhrases || [],
+            prefix
+);
+
             learnerInterestTextarea.required = true;
             mentorInterestTextarea.required = false;
         } else {
@@ -278,15 +290,5 @@ mentorInterestTextarea.addEventListener('input', () => {
 learnerInterestTextarea.addEventListener('input', () => {
     updateCharCountAndWarning(learnerInterestTextarea, 'learnerCount', 'learnerWarning');
 });
-
-// Function to update count + show/hide warning
-function updateCharCountAndWarning(textarea, countId, warningId) {
-    const countEl = document.getElementById(countId);
-    const warningEl = document.getElementById(warningId);
-    const length = textarea.value.length;
-
-    if (countEl) countEl.textContent = length;
-    if (warningEl) warningEl.style.display = length >= 300 ? 'block' : 'none';
-}
 
 })();
