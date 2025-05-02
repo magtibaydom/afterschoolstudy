@@ -269,5 +269,24 @@ roleButtons.forEach(button => {
           loadingScreen.style.visibility = "hidden";
         }, 1000); // Change the duration as needed
       };
-      
+
+      // Character count + warning for both textareas
+mentorInterestTextarea.addEventListener('input', () => {
+    updateCharCountAndWarning(mentorInterestTextarea, 'mentorCount', 'mentorWarning');
+});
+
+learnerInterestTextarea.addEventListener('input', () => {
+    updateCharCountAndWarning(learnerInterestTextarea, 'learnerCount', 'learnerWarning');
+});
+
+// Function to update count + show/hide warning
+function updateCharCountAndWarning(textarea, countId, warningId) {
+    const countEl = document.getElementById(countId);
+    const warningEl = document.getElementById(warningId);
+    const length = textarea.value.length;
+
+    if (countEl) countEl.textContent = length;
+    if (warningEl) warningEl.style.display = length >= 300 ? 'block' : 'none';
+}
+
 })();

@@ -110,17 +110,16 @@ body.dark .privacy-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.8rem; /* Increased gap for better spacing */
+  gap: 1.2rem; /* Increased gap for better spacing */
   width: 100%;
 }
 
 .notify-form label:not([for="privacy"]) {
-  text-align: left;
+  text-align: center; /* Center align labels */
   display: block;
   font-size: 1.1rem;
   width: 100%;
-  margin-bottom: 0.3rem;
-  margin-left: 3rem;
+  margin-bottom: 1rem;
 }
 
 .notify-form textarea,

@@ -48,13 +48,14 @@
             <form class="notify-form" style="display: none;">
                 <div id="mentorQuestionContainer" style="display: none;">
                     <label for="mentorInterest" data-translate="mentor_question">What would you like to teach?</label>
-                    <textarea id="mentorInterest" data-translate-placeholder="mentorInterestPrefix" placeholder="I'd like to teach "></textarea>
-                </div>
-
-                <div id="learnerQuestionContainer" style="display: none;">
+                    <textarea maxlength="300" id="mentorInterest" data-translate-placeholder="mentorInterestPrefix" placeholder="I'd like to teach " oninput="checkCharLimit(this)"></textarea>
+                  </div>
+                  
+                  <div id="learnerQuestionContainer" style="display: none;">
                     <label for="learnerInterest" data-translate="learner_question">What would you like to learn?</label>
-                    <textarea id="learnerInterest" data-translate-placeholder="learnerInterestPrefix" placeholder="I'd like to learn "></textarea>
-                </div>
+                    <textarea maxlength="300" id="learnerInterest" data-translate-placeholder="learnerInterestPrefix" placeholder="I'd like to learn " oninput="checkCharLimit(this)"></textarea>
+                  </div>
+                  
 
                 <div>
                     <label for="email">Email:</label>
