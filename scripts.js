@@ -1,7 +1,10 @@
 (() => {
-    console.log("Dark mode script is running.");
+    console.log("Dark mode + language script is running.");
 
     const darkModeToggle = document.getElementById('darkModeToggle');
+    const languageToggle = document.getElementById('languageToggle');
+    const darkModeText = document.getElementById('darkModeText');
+    const languageText = document.getElementById('languageText');
     const roleButtons = document.querySelectorAll('.notify-btn');
     const form = document.querySelector('.notify-form');
     const mentorQuestionContainer = document.getElementById('mentorQuestionContainer');
@@ -11,72 +14,105 @@
     const thankYouMessage = document.getElementById('thankYouMessage');
     const signupButton = document.querySelector('.final-signup-btn');
     const copyBtn = document.querySelector('.copy-btn');
-    const signupButtonsContainer = document.querySelector('.role-selection'); // Updated selector
+    const signupButtonsContainer = document.querySelector('.role-selection');
 
-    const mentorPhrases = [
-        "resume writing and tailoring techniques",
-        "behavioral interview strategies",
-        "effective online and in-person networking",
-        "how to write targeted cover letters",
-        "how to prepare for virtual job fairs",
-        "how to showcase your projects online",
-        "how to build your mentor presence",
-        "strategies for guiding career transitions",
-        "demystifying industry-specific jargon",
-        "how to design engaging learning sessions",
-        "how to share your career journey effectively",
-        "how to provide constructive criticism",
-        "how to foster learner confidence",
-        "how to adapt to different learning styles",
-        "how to develop assessment strategies"
-    ];
-    const learnerPhrases = [
-        "how to find relevant internships",
-        "effective job search strategies",
-        "the basics of LinkedIn for professionals",
-        "how to explore different career paths",
-        "how to build a strong personal brand",
-        "how to write impactful resumes",
-        "how to ace job interviews",
-        "how to create a professional network",
-        "how to understand company culture",
-        "how to negotiate job offers",
-        "how to craft compelling personal statements",
-        "how to prepare for informational interviews",
-        "how to build a professional online presence",
-        "essential soft skills for the workplace",
-        "how the hiring process works"
-    ];
     let selectedRole = null;
     let mentorInterval;
     let learnerInterval;
 
-    // Function to set the theme based on preference
-    const setTheme = (isDark) => {
-        document.body.classList.toggle('dark', isDark);
-        darkModeToggle.innerText = isDark ? '☀️' : '🌙'; // Change icon based on theme
+    // LANGUAGE TOGGLE SETUP
+    let currentLanguage = 'en';
+    const translations = {};
+
+    const loadTranslations = async (lang) => {
+        if (translations[lang]) {
+            updatePageContent(lang);
+            updateLanguageToggleText(lang); // Update language toggle text
+            return;
+        }
+
+        try {
+            const response = await fetch(`${lang}.json`);
+            const data = await response.json();
+            translations[lang] = data;
+            updatePageContent(lang);
+            updateLanguageToggleText(lang); // Update language toggle text
+        } catch (error) {
+            console.error(`Error loading ${lang}.json:`, error);
+        }
     };
 
-    // Check for device preference on initial load
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        setTheme(true); // Set to dark mode if preferred
-    } else {
-        setTheme(false); // Set to light mode if preferred or no preference
-    }
+    const updatePageContent = (lang) => {
+        const elements = document.querySelectorAll('[data-translate]');
+        elements.forEach((el) => {
+            const key = el.getAttribute('data-translate');
+            const translation = translations[lang][key];
+            if (translation) {
+                el.innerHTML = translation;
+            }
+        });
 
-    // Dark mode toggle logic
-    darkModeToggle?.addEventListener('click', () => {
-        const isCurrentlyDark = document.body.classList.contains('dark');
-        setTheme(!isCurrentlyDark); // Toggle the theme
+        // Update placeholder text dynamically for textareas
+        const placeholders = document.querySelectorAll('[data-translate-placeholder]');
+        placeholders.forEach((el) => {
+            const key = el.getAttribute('data-translate-placeholder');
+            const translation = translations[lang][key];
+            if (translation) {
+                el.setAttribute('placeholder', translation);
+            }
+        });
+
+        // Restart typing effect with new prefix
+        if (selectedRole === 'mentor') {
+            clearInterval(mentorInterval);
+            const prefix = translations[lang].mentorInterestPrefix || "I'd like to teach ";
+            mentorInterval = startTypingEffect(mentorInterestTextarea, translations[lang].mentorPhrases || [], prefix);
+        } else if (selectedRole === 'learner') {
+            clearInterval(learnerInterval);
+            const prefix = translations[lang].learnerInterestPrefix || "I'd like to learn ";
+            learnerInterval = startTypingEffect(learnerInterestTextarea, translations[lang].learnerPhrases || [], prefix);
+        }
+    };
+
+    const updateLanguageToggleText = (lang) => {
+        const capitalizedLang = lang.charAt(0).toUpperCase() + lang.slice(1);
+        languageText.textContent = capitalizedLang;
+    };
+
+    // Language toggle as checkbox
+    languageToggle?.addEventListener('change', () => {
+        currentLanguage = languageToggle.checked ? 'tagalog' : 'english'; // 'tl' for Tagalog, 'en' for English
+        loadTranslations(currentLanguage);
     });
 
+    loadTranslations(currentLanguage);
+
+    // DARK MODE
+    const setTheme = (isDark) => {
+        document.body.classList.toggle('dark', isDark);
+        darkModeToggle.checked = isDark;  // Update checkbox state
+        darkModeText.textContent = isDark ? '🌙' : '☀️'; // Update dark mode text
+    };
+
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        setTheme(true);
+    } else {
+        setTheme(false);
+    }
+
+    // Dark mode toggle as checkbox
+    darkModeToggle?.addEventListener('change', () => {
+        setTheme(darkModeToggle.checked);
+    });
+
+    // TYPING EFFECT FUNCTION
     const startTypingEffect = (textarea, phrases, prefix) => {
         let phraseIndex = 0;
         let charIndex = 0;
         let isTyping = true;
         let pauseEnd = false;
-        const typeSpeed = 30; // Adjust typing speed (milliseconds per character)
-        const pauseDuration = 1000; // Adjust pause duration (milliseconds) after a phrase
+        const typeSpeed = 30;
+        const pauseDuration = 1000;
 
         return setInterval(() => {
             const currentPhrase = phrases[phraseIndex];
@@ -88,7 +124,7 @@
                 if (charIndex > currentPhrase.length) {
                     isTyping = false;
                     pauseEnd = true;
-                    setTimeout(() => { pauseEnd = false; }, pauseDuration); // Pause before erasing
+                    setTimeout(() => { pauseEnd = false; }, pauseDuration);
                 }
             } else if (!isTyping && !pauseEnd) {
                 textarea.placeholder = prefix + currentPhrase.substring(0, charIndex - 1);
@@ -103,27 +139,26 @@
         }, typeSpeed);
     };
 
-    // Show relevant question when role is selected
+    // ROLE SELECTION
     roleButtons.forEach(button => {
         button.addEventListener('click', (e) => {
             selectedRole = e.target.dataset.role;
             form.style.display = 'block';
-
-            // Clear any existing intervals
             clearInterval(mentorInterval);
             clearInterval(learnerInterval);
 
-            // Toggle visibility of question areas and start typing effect
             if (selectedRole === 'mentor') {
                 mentorQuestionContainer.style.display = 'block';
                 learnerQuestionContainer.style.display = 'none';
-                mentorInterval = startTypingEffect(mentorInterestTextarea, mentorPhrases, "I'd like to teach ");
+                const prefix = mentorInterestTextarea.placeholder || "I'd like to teach ";
+                mentorInterval = startTypingEffect(mentorInterestTextarea, translations[currentLanguage].mentorPhrases || [], prefix);
                 mentorInterestTextarea.required = true;
                 learnerInterestTextarea.required = false;
             } else if (selectedRole === 'learner') {
                 learnerQuestionContainer.style.display = 'block';
                 mentorQuestionContainer.style.display = 'none';
-                learnerInterval = startTypingEffect(learnerInterestTextarea, learnerPhrases, "I'd like to learn ");
+                const prefix = learnerInterestTextarea.placeholder || "I'd like to learn ";
+                learnerInterval = startTypingEffect(learnerInterestTextarea, translations[currentLanguage].learnerPhrases || [], prefix);
                 learnerInterestTextarea.required = true;
                 mentorInterestTextarea.required = false;
             } else {
@@ -131,28 +166,22 @@
                 learnerInterestTextarea.required = false;
             }
 
-            // Highlight selected role
-            roleButtons.forEach(btn => {
-                btn.classList.remove('selected');
-                btn.classList.remove('active');
-            });
+            roleButtons.forEach(btn => btn.classList.remove('selected', 'active'));
             e.target.classList.add('selected');
         });
     });
 
-    // Copy email functionality
+    // COPY TO CLIPBOARD
     if (copyBtn) {
         copyBtn.addEventListener('click', () => {
             const email = 'hello@afterschoolstudyclub.com';
             navigator.clipboard.writeText(email)
                 .then(() => {
-                    // Show confirmation
                     const confirmation = document.createElement('div');
                     confirmation.className = 'copy-confirmation';
                     confirmation.textContent = 'Email copied to clipboard!';
                     document.body.appendChild(confirmation);
 
-                    // Show and then hide the confirmation
                     setTimeout(() => {
                         confirmation.classList.add('show');
                     }, 10);
@@ -170,45 +199,33 @@
         });
     }
 
- // Spinner functionality for form submission
- if (form && signupButton) {
-    form.addEventListener('submit', function() {
-        // Add loading state to button
-        signupButton.classList.add('loading');
-        signupButton.disabled = true;
+    // FORM SUBMIT HANDLING
+    if (form && signupButton) {
+        form.addEventListener('submit', function () {
+            signupButton.classList.add('loading');
+            signupButton.disabled = true;
 
-        // Reset button selection
-        roleButtons.forEach(btn => {
-            btn.classList.remove('selected');
-        });
+            roleButtons.forEach(btn => btn.classList.remove('selected'));
 
-        // Show thank you message and hide form elements and the buttons
-        setTimeout(() => {
-            thankYouMessage.style.display = 'block';
-            form.style.display = 'none';
-            signupButton.classList.remove('loading');
-            signupButton.disabled = false;
-
-            // **HIDE THE BUTTONS AND CONTAINER**
-            roleButtons.forEach(btn => {
-                btn.style.display = 'none';
-            });
-            if (signupButtonsContainer) {
-                signupButtonsContainer.style.display = 'none';
-            }
-
-            // **UNHIDE THE BUTTONS AND CONTAINER AFTER THE THANK YOU MESSAGE TIMEOUT**
             setTimeout(() => {
-                thankYouMessage.style.display = 'none';
-                roleButtons.forEach(btn => {
-                    btn.style.display = 'flex'; // Or 'inline-block' depending on your layout
-                });
-                if (signupButtonsContainer) {
-                    signupButtonsContainer.style.display = 'flex'; // Or your container's original display style
-                }
-            }, 10000); // Same duration as the thank you message timeout
+                thankYouMessage.style.display = 'block';
+                form.style.display = 'none';
+                signupButton.classList.remove('loading');
+                signupButton.disabled = false;
 
-        }, 1500); // Simulate submission delay
-    });
-}
+                roleButtons.forEach(btn => btn.style.display = 'none');
+                if (signupButtonsContainer) {
+                    signupButtonsContainer.style.display = 'none';
+                }
+
+                setTimeout(() => {
+                    thankYouMessage.style.display = 'none';
+                    roleButtons.forEach(btn => btn.style.display = 'flex');
+                    if (signupButtonsContainer) {
+                        signupButtonsContainer.style.display = 'flex';
+                    }
+                }, 10000);
+            }, 1500);
+        });
+    }
 })();

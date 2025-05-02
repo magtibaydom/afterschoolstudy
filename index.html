@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tl">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -13,32 +13,43 @@
 </head>
 <body>
     <div class="main-container">
-        <button id="darkModeToggle" class="dark-toggle">🌓 Dark Mode</button>
+        <!-- Dark Mode Toggle -->
+        <label class="toggle-container">
+            <input type="checkbox" id="darkModeToggle" class="toggle-checkbox">
+            <span class="toggle-slider"></span>
+            <span id="darkModeText" class="toggle-text">☀️</span>
+        </label>
+        
+        <label class="toggle-container">
+            <input type="checkbox" id="languageToggle" class="toggle-checkbox">
+            <span class="toggle-slider"></span>
+            <span id="languageText" class="toggle-text">EN</span>
+        </label>
         <a href="https://days.afterschoolstudyclub.com" target="_blank" style="text-decoration: none; color: inherit;">
             <div class="emoji">🚧🔨👷‍♂️</div>
         </a>
         <h1 id="pagename">After School Study Club</h1>
-        <p>We’re cooking up something awesome.</p>
+        <p data-translate="description">We’re cooking up something awesome.</p>
 
         <div class="role-selection">
             <div class="role-box">
-                <button type="button" class="notify-btn role-btn for-mentors" data-role="mentor">For Mentors</button>
+                <button type="button" class="notify-btn role-btn for-mentors" data-role="mentor" data-translate="for_mentors">For Mentors</button>
         </div>
             <div class="role-box">
-                <button type="button" class="notify-btn role-btn for-learners" data-role="learner">For Learners</button>
+                <button type="button" class="notify-btn role-btn for-learners" data-role="learner" data-translate="for_learners">For Learners</button>
         </div>
             </div>
             
             <div class="form-container">
             <form class="notify-form" style="display: none;">
                 <div id="mentorQuestionContainer" style="display: none;">
-                    <label for="mentorInterest">What would you like <strong>to teach?</strong></label>
-                    <textarea id="mentorInterest" placeholder="I'd like to teach "></textarea>
+                    <label for="mentorInterest" data-translate="mentor_question">What would you like to teach?</label>
+                    <textarea id="mentorInterest" data-translate-placeholder="mentorInterestPrefix" placeholder="I'd like to teach "></textarea>
                 </div>
 
                 <div id="learnerQuestionContainer" style="display: none;">
-                    <label for="learnerInterest">What would you like <strong>to learn?</strong></label>
-                    <textarea id="learnerInterest" placeholder="I'd like to learn"></textarea>
+                    <label for="learnerInterest" data-translate="learner_question">What would you like to learn?</label>
+                    <textarea id="learnerInterest" data-translate-placeholder="learnerInterestPrefix" placeholder="I'd like to learn "></textarea>
                 </div>
 
                 <div>
@@ -48,21 +59,21 @@
                     <div>
                         <div class="privacy-checkbox">
                             <input type="checkbox" id="privacy" name="privacy" required>
-                            <label for="privacy">I agree to the <a href="/privacy-policy/" target="_blank">Privacy Policy</a>.</label>
+                            <label for="privacy" data-translate="privacy_agreement">I agree to the <a href="/privacy-policy/" target="_blank">Privacy Policy</a>.</label>
                         </div>
 
                     </div>
                     
-                    <button type="submit" class="final-signup-btn">Sign Up</button>
+                    <button type="submit" class="final-signup-btn" data-translate="sign_up">Sign Up</button>
                 </div>
             </form>
         </div>
-            <div id="thankYouMessage" style="display: none;">Thanks for signing up! We will contact you soon.</div>
+            <div id="thankYouMessage" style="display: none;" data-translate="thank_you">Thanks for signing up! We will contact you soon.</div>
             <div class="thank-you-popup" style="display: none;">🎉 You're in!</div>
             <div class="email-contact">
-                <p>Have questions or want to get in touch?</p>
+                <p data-translate="have_questions">Have questions or want to get in touch?</p>
                 <div class="email-container">
-                    <a class="email-btn" href="mailto:hello@afterschoolstudyclub.com">
+                    <a class="email-btn" href="mailto:hello@afterschoolstudyclub.com" data-translate="email_us">
                         Email us at <strong>hello@afterschoolstudyclub.com</strong>
                     </a>
                     <button class="copy-btn" title="Copy email address">
@@ -71,7 +82,7 @@
                 </div>
         </div>
 
-        <div class="footer">Not a masterclass. Just a good start.</div>
+        <div class="footer" data-translate="footer_text">Not a masterclass. Just a good start.</div>
     </div>
 
 <script src="scripts.js"></script>

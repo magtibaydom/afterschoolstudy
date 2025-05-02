@@ -556,3 +556,66 @@ body.dark .privacy-content a:hover {
 body.dark .footer {
   color: var(--dark-accent);
 }
+
+/* Common Styles for Both Toggles */
+.toggle-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  margin-bottom: 0.4rem; /* Space below the toggle */
+}
+
+.toggle-checkbox {
+  opacity: 0;
+  position: absolute;
+}
+
+.toggle-slider {
+  position: relative;
+  width: 40px;
+  height: 20px;
+  background-color: #ccc;
+  border-radius: 50px;
+  transition: background-color 0.3s ease;
+}
+
+.toggle-slider:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 3px;
+  width: 14px;
+  height: 14px;
+  background-color: white;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.3s ease;
+}
+
+.toggle-checkbox:checked + .toggle-slider {
+  background-color: var(--accent); /* Accent color for the toggle */
+}
+
+.toggle-checkbox:checked + .toggle-slider:before {
+  transform: translateY(-50%) translateX(20px);
+}
+
+/* Text color when toggled */
+.toggle-text {
+  font-size: 1rem;
+  color: var(--toggle-text-light);
+}
+
+body.dark .toggle-text {
+  color: var(--toggle-text-light);
+}
+
+/* Language Toggle Customizations */
+#languageToggle:checked + .toggle-slider {
+  background-color: #ff7f50; /* Color for language toggle */
+}
+
+#languageToggle:checked + .toggle-slider:before {
+  transform: translateY(-50%) translateX(20px);
+}
