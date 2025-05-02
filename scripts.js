@@ -87,6 +87,18 @@
 
     loadTranslations(currentLanguage);
 
+    // Cheaty quick toggle to force typing effect to trigger
+setTimeout(() => {
+    languageToggle.checked = !languageToggle.checked;
+    languageToggle.dispatchEvent(new Event('change'));
+
+    setTimeout(() => {
+        languageToggle.checked = !languageToggle.checked;
+        languageToggle.dispatchEvent(new Event('change'));
+    }, 1); // toggle back after 100ms
+}, 200); // wait just enough for DOM to settle
+
+
     // DARK MODE
     const setTheme = (isDark) => {
         document.body.classList.toggle('dark', isDark);
@@ -150,8 +162,14 @@
             if (selectedRole === 'mentor') {
                 mentorQuestionContainer.style.display = 'block';
                 learnerQuestionContainer.style.display = 'none';
-                const prefix = mentorInterestTextarea.placeholder || "I'd like to teach ";
-                mentorInterval = startTypingEffect(mentorInterestTextarea, translations[currentLanguage].mentorPhrases || [], prefix);
+            
+                const prefix = translations[currentLanguage].mentorInterestPrefix || "I'd like to teach ";
+                mentorInterval = startTypingEffect(
+                    mentorInterestTextarea,
+                    translations[currentLanguage].mentorPhrases || [],
+                    prefix
+                );
+            
                 mentorInterestTextarea.required = true;
                 learnerInterestTextarea.required = false;
             } else if (selectedRole === 'learner') {
