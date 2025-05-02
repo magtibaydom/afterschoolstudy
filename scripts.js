@@ -2,7 +2,7 @@
     console.log("Dark mode script is running.");
 
     const darkModeToggle = document.getElementById('darkModeToggle');
-    const roleButtons = document.querySelectorAll('.role-btn');
+    const roleButtons = document.querySelectorAll('.notify-btn');
     const form = document.querySelector('.notify-form');
     const mentorQuestionContainer = document.getElementById('mentorQuestionContainer');
     const learnerQuestionContainer = document.getElementById('learnerQuestionContainer');
@@ -11,6 +11,7 @@
     const thankYouMessage = document.getElementById('thankYouMessage');
     const signupButton = document.querySelector('.final-signup-btn');
     const copyBtn = document.querySelector('.copy-btn');
+    const signupButtonsContainer = document.querySelector('.role-selection'); // Updated selector
 
     const mentorPhrases = [
         "resume writing and tailoring techniques",
@@ -169,25 +170,45 @@
         });
     }
 
-    // Spinner functionality for form submission
-    if (form && signupButton) {
-        form.addEventListener('submit', function() {
-            // Add loading state to button
-            signupButton.classList.add('loading');
-            signupButton.disabled = true;
+ // Spinner functionality for form submission
+ if (form && signupButton) {
+    form.addEventListener('submit', function() {
+        // Add loading state to button
+        signupButton.classList.add('loading');
+        signupButton.disabled = true;
 
-            // Show thank you message after submission
-            setTimeout(() => {
-                thankYouMessage.style.display = 'block';
-                form.style.display = 'none';
-                signupButton.classList.remove('loading');
-                signupButton.disabled = false;
-
-                // Hide the message after 15 seconds
-                setTimeout(() => {
-                    thankYouMessage.style.display = 'none';
-                }, 15000);
-            }, 1500); // Simulate submission delay
+        // Reset button selection
+        roleButtons.forEach(btn => {
+            btn.classList.remove('selected');
         });
-    }
+
+        // Show thank you message and hide form elements and the buttons
+        setTimeout(() => {
+            thankYouMessage.style.display = 'block';
+            form.style.display = 'none';
+            signupButton.classList.remove('loading');
+            signupButton.disabled = false;
+
+            // **HIDE THE BUTTONS AND CONTAINER**
+            roleButtons.forEach(btn => {
+                btn.style.display = 'none';
+            });
+            if (signupButtonsContainer) {
+                signupButtonsContainer.style.display = 'none';
+            }
+
+            // **UNHIDE THE BUTTONS AND CONTAINER AFTER THE THANK YOU MESSAGE TIMEOUT**
+            setTimeout(() => {
+                thankYouMessage.style.display = 'none';
+                roleButtons.forEach(btn => {
+                    btn.style.display = 'flex'; // Or 'inline-block' depending on your layout
+                });
+                if (signupButtonsContainer) {
+                    signupButtonsContainer.style.display = 'flex'; // Or your container's original display style
+                }
+            }, 10000); // Same duration as the thank you message timeout
+
+        }, 1500); // Simulate submission delay
+    });
+}
 })();
