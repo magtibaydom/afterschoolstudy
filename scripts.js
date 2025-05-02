@@ -267,7 +267,7 @@ roleButtons.forEach(button => {
         setTimeout(function () {
           loadingScreen.style.opacity = "0";
           loadingScreen.style.visibility = "hidden";
-        }, 2000); // Change the duration as needed
+        }, 1000); // Change the duration as needed
       };
       
 })();
