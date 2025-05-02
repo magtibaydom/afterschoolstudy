@@ -29,6 +29,11 @@ body.dark {
   --toggle-text-light: #ffffff; /* Light text for toggle in dark mode */
 }
 
+html,
+body {
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
 /* Base styles */
 body {
   font-family: var(--font-primary);
@@ -186,7 +191,6 @@ body.dark .notify-form input {
   background-color: #845820; /* Darker orange */
   transform: scale(1.1); /* Slightly larger */
   box-shadow: 0 0 0 2px white, 0 0 0 4px #efb05d; /* Double border effect */
-  transition: transform 0.3s ease;
 }
 
 /* Default 'For Mentors' button style */
@@ -199,12 +203,11 @@ body.dark .notify-form input {
   background-color: #033f7f; /* Darker blue */
   transform: scale(1.1); /* Slightly larger */
   box-shadow: 0 0 0 2px white, 0 0 0 4px #007bff; /* Double border effect */
-  transition: transform 0.3s ease;
 }
 
 .notify-btn.selected {
   transform: scale(1.1); /* Adjust the scale factor as needed */
-  transition: transform 0.3s ease; /* Add a smooth transition */
+  transition: transform 0.15s ease-in-out; /* Shorter duration, slightly different easing */
 }
 
 /* 'For Learners' button hover style */
@@ -520,9 +523,13 @@ input[type="checkbox"] {
   color: var(--dark-accent); /* Darker accent on hover */
 }
 
-body.dark .privacy-container {
+body.dark .privacy-container,
+body.dark .privacy-content { /* Apply dark mode styles to both */
   background-color: var(--dark-bg-gradient-start);
   color: var(--text);
+}
+
+body.dark .privacy-container {
   box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
 }
 
@@ -549,4 +556,3 @@ body.dark .privacy-content a:hover {
 body.dark .footer {
   color: var(--dark-accent);
 }
-
