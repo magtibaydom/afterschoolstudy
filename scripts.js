@@ -95,7 +95,7 @@ setTimeout(() => {
     setTimeout(() => {
         languageToggle.checked = !languageToggle.checked;
         languageToggle.dispatchEvent(new Event('change'));
-    }, 1); // toggle back after 100ms
+    }, 5); // toggle back after 100ms
 }, 200); // wait just enough for DOM to settle
 
 
@@ -151,43 +151,56 @@ setTimeout(() => {
         }, typeSpeed);
     };
 
-    // ROLE SELECTION
-    roleButtons.forEach(button => {
-        button.addEventListener('click', (e) => {
-            selectedRole = e.target.dataset.role;
-            form.style.display = 'block';
-            clearInterval(mentorInterval);
-            clearInterval(learnerInterval);
+  // ROLE SELECTION
+roleButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+        selectedRole = e.target.dataset.role;
+        form.style.display = 'block';
+        
+        // Clear any existing typing effects before starting a new one
+        clearInterval(mentorInterval);
+        clearInterval(learnerInterval);
+        
+        // Reset placeholders
+        mentorInterestTextarea.placeholder = "";
+        learnerInterestTextarea.placeholder = "";
 
-            if (selectedRole === 'mentor') {
-                mentorQuestionContainer.style.display = 'block';
-                learnerQuestionContainer.style.display = 'none';
+        if (selectedRole === 'mentor') {
+            mentorQuestionContainer.style.display = 'block';
+            learnerQuestionContainer.style.display = 'none';
             
-                const prefix = translations[currentLanguage].mentorInterestPrefix || "I'd like to teach ";
-                mentorInterval = startTypingEffect(
-                    mentorInterestTextarea,
-                    translations[currentLanguage].mentorPhrases || [],
-                    prefix
-                );
+            const prefix = translations[currentLanguage].mentorInterestPrefix || "I'd like to teach ";
+            mentorInterval = startTypingEffect(
+                mentorInterestTextarea,
+                translations[currentLanguage].mentorPhrases || [],
+                prefix
+            );
             
-                mentorInterestTextarea.required = true;
-                learnerInterestTextarea.required = false;
-            } else if (selectedRole === 'learner') {
-                learnerQuestionContainer.style.display = 'block';
-                mentorQuestionContainer.style.display = 'none';
-                const prefix = learnerInterestTextarea.placeholder || "I'd like to learn ";
-                learnerInterval = startTypingEffect(learnerInterestTextarea, translations[currentLanguage].learnerPhrases || [], prefix);
-                learnerInterestTextarea.required = true;
-                mentorInterestTextarea.required = false;
-            } else {
-                mentorInterestTextarea.required = false;
-                learnerInterestTextarea.required = false;
-            }
+            mentorInterestTextarea.required = true;
+            learnerInterestTextarea.required = false;
+        } else if (selectedRole === 'learner') {
+            learnerQuestionContainer.style.display = 'block';
+            mentorQuestionContainer.style.display = 'none';
 
-            roleButtons.forEach(btn => btn.classList.remove('selected', 'active'));
-            e.target.classList.add('selected');
-        });
+            const prefix = learnerInterestTextarea.placeholder || "I'd like to learn ";
+            learnerInterval = startTypingEffect(
+                learnerInterestTextarea,
+                translations[currentLanguage].learnerPhrases || [],
+                prefix
+            );
+            learnerInterestTextarea.required = true;
+            mentorInterestTextarea.required = false;
+        } else {
+            mentorInterestTextarea.required = false;
+            learnerInterestTextarea.required = false;
+        }
+
+        // Handle button styling
+        roleButtons.forEach(btn => btn.classList.remove('selected', 'active'));
+        e.target.classList.add('selected');
     });
+});
+
 
     // COPY TO CLIPBOARD
     if (copyBtn) {
