@@ -85,7 +85,7 @@ body.dark .privacy-container {
 
 /* Media query for screens smaller than 600px (typical mobile screens) */
 @media (max-width: 600px) {
-  .main-container {
+  .main-container,body.dark .main-container {
     background-color: transparent; /* Remove background color */
     box-shadow: none; /* Remove drop shadow */
     padding: 1.5rem; /* Adjust padding if needed */
