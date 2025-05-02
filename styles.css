@@ -7,6 +7,11 @@
   font-style: normal;
 }
 
+/* Remove tap highlight on supported browsers */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
 :root {
   --bg: #f8f9fa; /* Light background */
   --text: #333333; /* Dark text */
