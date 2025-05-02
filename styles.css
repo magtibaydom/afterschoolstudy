@@ -18,7 +18,7 @@
   --light-bg-gradient-start: #aae2f8;
   --light-bg-gradient-end: #f5e1c7;
   --dark-bg-gradient-start: #121212;
-  --dark-bg-gradient-end: #6393a7;
+  --dark-bg-gradient-end: #111d37;
   --toggle-text-light: #333333; /* Dark text for toggle in light mode */
 }
 
@@ -224,6 +224,7 @@ body.dark .notify-form input {
   padding: 0.8rem 2rem;
   font-size: 1.1rem;
   background-color: var(--button-bg);
+  font-family: var(--font-primary); /* Added font-family here */
   color: white;
   border: none;
   border-radius: 50px;
