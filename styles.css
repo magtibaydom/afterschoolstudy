@@ -110,16 +110,17 @@ body.dark .privacy-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.2rem; /* Increased gap for better spacing */
+  gap: 0.8rem; /* Increased gap for better spacing */
   width: 100%;
 }
 
 .notify-form label:not([for="privacy"]) {
-  text-align: center; /* Center align labels */
+  text-align: left;
   display: block;
   font-size: 1.1rem;
   width: 100%;
-  margin-bottom: 1rem;
+  margin-bottom: 0.3rem;
+  margin-left: 3rem;
 }
 
 .notify-form textarea,
@@ -187,7 +188,7 @@ body.dark .notify-form input {
 
 /* Default 'For Learners' button style */
 .notify-btn.for-learners {
-  background-color: #eaa244; /* Orange color for Learners */
+  background-color: #efb05d; /* Orange color for Learners */
 }
 
 /* 'For Learners' button when selected */
@@ -482,6 +483,14 @@ body.dark #thankYouMessage {
   background-color: #2E7D32;
 }
 
+.checkmark {
+  display: inline-block;
+  align-items: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #1e90ff; /* Accent color */
+}
 .privacy-checkbox {
   display: flex;
   gap: 0.5rem;
@@ -492,10 +501,38 @@ body.dark #thankYouMessage {
 
 
 input[type="checkbox"] {
-  width: 15px;
-  height: 15px;
+  appearance: none;
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #1e90ff;
+  border-radius: 50%;
+  background-color: white;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+  display: inline-block;
+  vertical-align: middle; /* fixes alignment issue */
+  flex-shrink: 0; /* prevent shrinking */
 }
 
+/* Checked state */
+input[type="checkbox"]:checked {
+  background-color: #1e90ff;
+  border-color: #1e90ff;
+}
+
+/* Checkmark */
+input[type="checkbox"]:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -55%);
+  font-size: 12px;
+  color: white;
+  font-weight: bold;
+}
 /* ... other styles ... */
 
 /* Styles specifically for the privacy policy container */
